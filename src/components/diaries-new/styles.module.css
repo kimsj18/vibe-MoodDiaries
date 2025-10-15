@@ -1,175 +1,147 @@
-/* 부모 컨테이너 - 640px * 560px */
+/* Wrapper - 640px * 560px, 24px border radius, white background */
 .wrapper {
   width: 640px;
   height: 560px;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
+  background-color: var(--color-background-primary);
+  border-radius: 24px;
+  padding: 24px;
   box-sizing: border-box;
+  gap: 40px;
 }
 
-/* Header - full * 24px */
+/* Header - 일기 쓰기 title */
 .header {
   width: 100%;
-  height: 24px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
-.header h1 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #333333;
+.headerTitle {
+  font-family: var(--typography-headline01-fontFamily);
+  font-weight: var(--typography-headline01-fontWeight);
+  font-size: var(--typography-headline01-fontSize);
+  line-height: var(--typography-headline01-lineHeight);
+  color: var(--color-text-primary);
   margin: 0;
 }
 
-/* Gap - full * 40px */
-.gap {
-  width: 100%;
-  height: 40px;
-}
-
-/* Emotion Box - full * 64px */
+/* Emotion Box - 기분 선택 영역 */
 .emotionBox {
   width: 100%;
-  height: 64px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.emotionTitle {
+  font-family: var(--typography-headline03-fontFamily);
+  font-weight: var(--typography-headline03-fontWeight);
+  font-size: var(--typography-headline03-fontSize);
+  line-height: var(--typography-headline03-lineHeight);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.emotionRadioGroup {
+  display: flex;
   gap: 20px;
-  background-color: #f8f9fa;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
-  padding: 0 20px;
-  box-sizing: border-box;
+  align-items: center;
 }
 
-.emotionItem {
-  width: 40px;
-  height: 40px;
+.emotionRadio {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 24px;
+  gap: 8px;
   cursor: pointer;
-  border-radius: 50%;
-  transition: background-color 0.2s ease;
 }
 
-.emotionItem:hover {
-  background-color: #e9ecef;
+.emotionRadioInput {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  cursor: pointer;
 }
 
-/* Input Title - full * 76px */
+.emotionRadioLabel {
+  font-family: var(--typography-title01-fontFamily);
+  font-weight: var(--typography-title01-fontWeight);
+  font-size: var(--typography-title01-fontSize);
+  line-height: var(--typography-title01-lineHeight);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+/* Input Title - 제목 입력 영역 */
 .inputTitle {
   width: 100%;
-  height: 76px;
   display: flex;
-  align-items: center;
-  padding: 0 16px;
-  box-sizing: border-box;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.inputTitle input {
+.inputLabel {
+  font-family: var(--typography-body02_m-fontFamily);
+  font-weight: var(--typography-body02_m-fontWeight);
+  font-size: var(--typography-body02_m-fontSize);
+  line-height: var(--typography-body02_m-lineHeight);
+  color: var(--color-text-secondary);
+}
+
+.titleInput {
   width: 100%;
-  height: 48px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-  padding: 0 12px;
-  font-size: 16px;
-  outline: none;
-  box-sizing: border-box;
 }
 
-.inputTitle input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
-.inputTitle input::placeholder {
-  color: #6c757d;
-}
-
-/* Input Content - full * 156px */
+/* Input Content - 내용 입력 영역 */
 .inputContent {
   width: 100%;
-  height: 156px;
   display: flex;
-  align-items: flex-start;
-  padding: 0 16px;
-  box-sizing: border-box;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
 }
 
-.inputContent textarea {
+.contentTextarea {
   width: 100%;
-  height: 120px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-  padding: 12px;
-  font-size: 14px;
-  font-family: inherit;
+  height: 128px;
+  padding: 16px;
+  border: 1px solid var(--color-border-primary);
+  border-radius: 8px;
+  background-color: var(--color-background-primary);
+  font-family: var(--typography-body01-fontFamily);
+  font-weight: var(--typography-body01-fontWeight);
+  font-size: var(--typography-body01-fontSize);
+  line-height: var(--typography-body01-lineHeight);
+  color: var(--color-text-primary);
   resize: none;
   outline: none;
   box-sizing: border-box;
 }
 
-.inputContent textarea:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+.contentTextarea:focus {
+  border-color: var(--color-border-focus);
 }
 
-.inputContent textarea::placeholder {
-  color: #6c757d;
+.contentTextarea::placeholder {
+  color: var(--color-text-tertiary);
 }
 
-/* Footer - full * 48px */
+/* Footer - 버튼 영역 */
 .footer {
   width: 100%;
-  height: 48px;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
-  padding: 0 16px;
-  box-sizing: border-box;
+  justify-content: center;
+  gap: 16px;
 }
 
-.cancelBtn {
-  width: 80px;
-  height: 36px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-  background-color: #ffffff;
-  color: #6c757d;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.closeButton {
+  width: 104px;
+  height: 48px;
 }
 
-.cancelBtn:hover {
-  background-color: #f8f9fa;
-  border-color: #adb5bd;
-}
-
-.saveBtn {
-  width: 80px;
-  height: 36px;
-  border: none;
-  border-radius: 6px;
-  background-color: #007bff;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.saveBtn:hover {
-  background-color: #0056b3;
+.submitButton {
+  width: 104px;
+  height: 48px;
 }
