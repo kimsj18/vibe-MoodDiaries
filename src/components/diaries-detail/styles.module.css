@@ -42,7 +42,7 @@
   height: 32px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
   padding-top: 16px;
 }
 
@@ -121,6 +121,7 @@
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 5;
+  line-clamp: 5;
   -webkit-box-orient: vertical;
 }
 
@@ -171,12 +172,12 @@
   width: 51px;
   height: 40px;
   border-radius: 8px;
-  border: 1px solid var(--color-border-primary);
+  border: 1px solid var(--color-border-primary) !important;
   background-color: var(--color-background-primary);
   font-family: var(--typography-title01-fontFamily);
   font-weight: var(--typography-title01-fontWeight);
   font-size: var(--typography-title01-fontSize);
-  color: var(--color-text-primary);
+  color: var(--color-text-primary) !important ;
 }
 
 /* retrospect-input: 1168 * 85 */
@@ -210,6 +211,9 @@
 
 .retrospectSubmitButton {
   width: 51px;
+  /* color: white !important; */
+  background-color: black !important;
+  border: none !important;
 }
 
 /* gap: 1168 * 16 */
@@ -226,11 +230,11 @@
   flex-direction: column;
   border-radius: 16px;
   background-color: var(--color-background-primary);
-  border: 1px solid var(--color-border-secondary);
+  /* border: 1px solid var(--color-border-secondary); */
 }
 
 .retrospectItem {
-  width: 1168px;
+  flex: 1;
   height: 24px;
   display: flex;
   gap: 12px;
@@ -255,10 +259,10 @@
 }
 
 .retrospectDivider {
-  width: 1168px;
+  width: 100%;
   height: 1px;
   background-color: var(--color-border-secondary);
-  margin: 0 -16px;
+  margin: 0;
 }
 
 /* 추가 스타일 */

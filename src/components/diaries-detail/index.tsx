@@ -146,7 +146,7 @@ const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
         <div className={styles.retrospectInputContainer}>
           <Input
             variant="primary"
-            size="medium"
+            size="large"
             theme="light"
             placeholder="회고를 남겨보세요."
             value={retrospectInput}
@@ -155,7 +155,7 @@ const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
           />
           <Button
             variant="primary"
-            size="medium"
+            size="large"
             theme="light"
             onClick={handleRetrospectSubmit}
             className={styles.retrospectSubmitButton}
@@ -171,11 +171,13 @@ const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
       {/* retrospect-list: 1168 * 72 */}
       <div className={styles.retrospectList}>
         {mockRetrospectData.map((retrospect, index) => (
-          <div key={retrospect.id} className={styles.retrospectItem}>
-            <span className={styles.retrospectContent}>{retrospect.content}</span>
-            <span className={styles.retrospectDate}>[{retrospect.createdAt}]</span>
+          <React.Fragment key={retrospect.id}>
+            <div className={styles.retrospectItem}>
+              <span className={styles.retrospectContent}>{retrospect.content}</span>
+              <span className={styles.retrospectDate}>[{retrospect.createdAt}]</span>
+            </div>
             {index < mockRetrospectData.length - 1 && <div className={styles.retrospectDivider}></div>}
-          </div>
+          </React.Fragment>
         ))}
       </div>
     </div>
