@@ -1,0 +1,238 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 1168px;
+  margin: 0 auto;
+  /* padding: 0 16px; */
+  background-color: white;
+}
+
+/* 첫 번째 gap: 1168 * 32 (가로 1168px, 세로 32px) */
+.gap1 {
+  width: 1168px;
+  height: 32px;
+  background-color: transparent;
+}
+
+/* Search 영역: 1168 * 48 (가로 1168px, 세로 48px) */
+.search {
+  width: 1168px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface-primary);
+  /* border: 1px solid var(--color-border-primary); */
+  /* 피그마 스펙 반영: border 색상 토큰을 중립 300(#C7C7C7)에 맞춤 */
+  --color-border-primary: var(--color-neutral-300);
+}
+
+.searchContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0;
+}
+
+.searchLeftGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  /* background-color: blue; */
+}
+
+/* width 전용 클래스 (하드코딩 금지: 토큰 기반 색상/타이포만 사용) */
+/* .selectWidth { width: 120px; }
+.searchWidth { width: 320px; } */
+.selectWidth { 
+  width: 120px !important; 
+  /* min-width: 120px !important; */
+}
+.searchWidth { 
+  width: 320px !important; 
+  /* min-width: 320px !important; */
+}
+.buttonWidth { width: 110px; }
+
+/* 피그마 스펙 반영: Searchbar(3:1566) large 사이즈의 pill 형태 라운드(100px) 적용 */
+.search :global(.searchBarContainer.size-large) {
+  border-radius: 100px;
+}
+
+/* 두 번째 gap: 1168 * 42 (가로 1168px, 세로 42px) */
+.gap2 {
+  width: 1168px;
+  height: 42px;
+  background-color: transparent;
+}
+
+/* Main 영역: 1168 * 936 (가로 1168px, 세로 936px) */
+.main {
+  width: 1168px;
+  height: 936px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: var(--color-surface-secondary); */
+  /* border: 1px solid var(--color-border-secondary); */
+}
+
+.mainContent {
+  width: 100%;
+  height: 100%;
+}
+
+/* 세 번째 gap: 1168 * 40 (가로 1168px, 세로 40px) */
+.gap3 {
+  width: 1168px;
+  height: 40px;
+  background-color: transparent;
+}
+
+/* Pagination 영역: 1168 * 32 (가로 1168px, 세로 32px) */
+.pagination {
+  width: 1168px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: var(--color-surface-secondary); */
+  /* border: 1px solid var(--color-border-secondary); */
+}
+
+.paginationContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Pagination width 전용 클래스 */
+.paginationWidth { 
+  width: 288px; /* 피그마 디자인에 맞춘 전체 너비 */
+}
+
+/* ===== Diaries Main: Card Grid ===== */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 274px);
+  column-gap: 24px;
+  row-gap: 24px;
+}
+
+/* 일기카드 - box-shadow 제거 요구사항 반영 */
+.styles_diaryCard {
+  display: flex;
+  flex-direction: column;
+  width: 274px;
+  height: 296px;
+  background-color: var(--color-surface-primary);
+  border: 1px solid var(--color-border-secondary);
+  border-radius: 16px;
+}
+
+.styles_cardImageWrapper {
+  position: relative;
+  width: 274px;
+  height: 208px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+/* border-radius 16px 16px 16px 16px 통일 */
+.styles_cardImage {
+  object-fit: cover;
+  border-radius: 16px 16px 16px 16px;
+}
+
+/* styles_cardContent height 제거 (auto) */
+.styles_cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px 16px 16px;
+  height: 88px;
+  justify-content: space-between;
+}
+
+/* 카드 우측 상단 닫기 버튼 */
+.styles_closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 40px;
+}
+
+.styles_closeIcon {
+  width: 36px;
+  height: 36px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.styles_closeButton:hover .styles_closeIcon {
+  opacity: 1;
+}
+
+.styles_cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 24px;
+}
+
+.styles_emotionChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  /* padding: 4px 8px; */
+  border-radius: 999px;
+  color: var(--color-text-inverse);
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.styles_dateText {
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.styles_cardBody {
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  line-height: 24px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* 네 번째 gap: 1168 * 40 (가로 1168px, 세로 40px) */
+.gap4 {
+  width: 1168px;
+  height: 40px;
+  background-color: transparent;
+}
+
+
+

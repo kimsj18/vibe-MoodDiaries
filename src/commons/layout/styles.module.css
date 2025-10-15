@@ -1,0 +1,145 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  width: 1168px;
+  margin: 0 auto;
+}
+
+.header {
+  width: 1168px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 0;
+}
+
+.logo {
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 16px;
+  letter-spacing: -0.18px;
+  color: #000000;
+}
+
+.gap {
+  width: 1168px;
+  height: 24px;
+}
+
+.banner {
+  width: 1168px;
+  height: 240px;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.navigation {
+  width: 1168px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.tabContainer {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.tabActive {
+  width: 119px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #000000;
+}
+
+.tabInactive {
+  width: 119px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabText {
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: -0.24px;
+}
+
+.tabActive .tabText {
+  color: #000000;
+}
+
+.tabInactive .tabText {
+  color: #ababab;
+  font-weight: 500;
+}
+
+.children {
+  width: 1168px;
+  min-height: 400px;
+  background-color: #fafafa;
+}
+
+.footer {
+  width: 100vw;
+  height: 160px;
+  background-color: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: calc(-50vw + 50%);
+}
+
+.footerContent {
+  width: 1168px;
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerTitle {
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  color: #000000;
+}
+
+.footerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footerText {
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.14px;
+  color: #5f5f5f;
+}
+
+.footerCopyright {
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.14px;
+  color: #919191;
+}

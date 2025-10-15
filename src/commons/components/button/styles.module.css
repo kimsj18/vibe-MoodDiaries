@@ -1,0 +1,386 @@
+/* Button Base Styles */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  outline: none;
+  position: relative;
+  font-family: var(--font-family-korean-primary);
+  font-weight: 600; /* Pretendard SemiBold 600 */
+  line-height: 24px;
+  letter-spacing: -0.18px;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Button Sizes */
+.size-small {
+  height: 24px;
+  padding: 0 8px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.size-medium {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 16px;
+}
+
+.size-large {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 18px;
+}
+
+/* Primary Variant - Light Theme */
+.variant-primary.theme-light {
+  background-color: var(--color-interactive-primary);
+  color: var(--color-text-inverse);
+  border-color: var(--color-interactive-primary);
+}
+
+.variant-primary.theme-light:hover:not(:disabled) {
+  background-color: var(--color-interactive-primary-hover);
+  border-color: var(--color-interactive-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(2, 132, 199, 0.2);
+}
+
+.variant-primary.theme-light:active:not(:disabled) {
+  background-color: var(--color-interactive-primary-active);
+  border-color: var(--color-interactive-primary-active);
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2);
+}
+
+/* Primary Variant - Dark Theme */
+.variant-primary.theme-dark {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.variant-primary.theme-dark:hover:not(:disabled) {
+  background-color: var(--color-interactive-primary-hover);
+  border-color: var(--color-interactive-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(14, 165, 233, 0.3);
+}
+
+.variant-primary.theme-dark:active:not(:disabled) {
+  background-color: var(--color-interactive-primary-active);
+  border-color: var(--color-interactive-primary-active);
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(14, 165, 233, 0.3);
+}
+
+/* Secondary Variant - Light Theme */
+.variant-secondary.theme-light {
+  background-color: var(--color-surface-primary);
+  color: var(--color-interactive-primary);
+  border-color: var(--color-interactive-primary);
+}
+
+.variant-secondary.theme-light:hover:not(:disabled) {
+  background-color: var(--color-interactive-primary);
+  color: var(--color-text-inverse);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(2, 132, 199, 0.15);
+}
+
+.variant-secondary.theme-light:active:not(:disabled) {
+  background-color: var(--color-interactive-primary-active);
+  color: var(--color-text-inverse);
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(2, 132, 199, 0.15);
+}
+
+/* Secondary Variant - Dark Theme */
+.variant-secondary.theme-dark {
+  background-color: var(--color-surface-primary);
+  color: var(--color-interactive-primary);
+  border-color: var(--color-interactive-primary);
+}
+
+.variant-secondary.theme-dark:hover:not(:disabled) {
+  background-color: var(--color-interactive-primary);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(14, 165, 233, 0.25);
+}
+
+.variant-secondary.theme-dark:active:not(:disabled) {
+  background-color: var(--color-interactive-primary-active);
+  color: var(--color-text-primary);
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(14, 165, 233, 0.25);
+}
+
+/* Tertiary Variant - Light Theme */
+.variant-tertiary.theme-light {
+  background-color: transparent;
+  color: var(--color-interactive-primary);
+  border-color: transparent;
+}
+
+.variant-tertiary.theme-light:hover:not(:disabled) {
+  background-color: var(--color-surface-secondary);
+  color: var(--color-interactive-primary-hover);
+  transform: translateY(-1px);
+}
+
+.variant-tertiary.theme-light:active:not(:disabled) {
+  background-color: var(--color-surface-tertiary);
+  color: var(--color-interactive-primary-active);
+  transform: translateY(0);
+}
+
+/* Tertiary Variant - Dark Theme */
+.variant-tertiary.theme-dark {
+  background-color: transparent;
+  color: var(--color-interactive-primary);
+  border-color: transparent;
+}
+
+.variant-tertiary.theme-dark:hover:not(:disabled) {
+  background-color: var(--color-surface-secondary);
+  color: var(--color-interactive-primary-hover);
+  transform: translateY(-1px);
+}
+
+.variant-tertiary.theme-dark:active:not(:disabled) {
+  background-color: var(--color-surface-tertiary);
+  color: var(--color-interactive-primary-active);
+  transform: translateY(0);
+}
+
+/* Disabled State */
+.button:disabled,
+.button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.button:disabled:hover,
+.button.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Loading State */
+.button.loading {
+  cursor: wait;
+}
+
+.button.loading .content {
+  opacity: 0.3;
+}
+
+/* Full Width */
+.button.fullWidth {
+  width: 100%;
+}
+
+/* Icon Styles */
+.leftIcon,
+.rightIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.leftIcon {
+  margin-right: -0.125rem;
+}
+
+.rightIcon {
+  margin-left: -0.125rem;
+}
+
+/* Size-specific icon adjustments */
+.size-small .leftIcon,
+.size-small .rightIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.size-medium .leftIcon,
+.size-medium .rightIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.size-large .leftIcon,
+.size-large .rightIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Content wrapper */
+.content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Loading Spinner */
+.loadingSpinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+.size-small .spinner {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.size-large .spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+    stroke-dashoffset: 31.416;
+  }
+  50% {
+    transform: rotate(180deg);
+    stroke-dashoffset: 15.708;
+  }
+  100% {
+    transform: rotate(360deg);
+    stroke-dashoffset: 31.416;
+  }
+}
+
+/* Button Group Styles */
+.buttonGroup {
+  display: flex;
+  align-items: center;
+}
+
+.buttonGroup.orientation-horizontal {
+  flex-direction: row;
+}
+
+.buttonGroup.orientation-vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Button Group Spacing */
+.buttonGroup.spacing-none {
+  gap: 0;
+}
+
+.buttonGroup.spacing-small {
+  gap: 0.25rem;
+}
+
+.buttonGroup.spacing-medium {
+  gap: 0.5rem;
+}
+
+.buttonGroup.spacing-large {
+  gap: 1rem;
+}
+
+/* Button Group - Connected buttons */
+.buttonGroup.spacing-none .button:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.buttonGroup.orientation-horizontal.spacing-none .button:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.buttonGroup.orientation-horizontal.spacing-none .button:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.buttonGroup.orientation-vertical.spacing-none .button:first-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.buttonGroup.orientation-vertical.spacing-none .button:last-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .size-large {
+    height: 2.75rem; /* 44px - better for mobile touch */
+    padding: 0 1.25rem;
+  }
+  
+  .size-medium {
+    height: 2.25rem; /* 36px */
+    padding: 0 0.875rem;
+  }
+  
+  .size-small {
+    height: 2rem; /* 32px */
+    padding: 0 0.625rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .button {
+    border-width: 2px;
+  }
+  
+  .variant-tertiary.theme-light,
+  .variant-tertiary.theme-dark {
+    border-color: currentColor;
+  }
+}
+
+/* Removed figma-* styles to reset per prompt */
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+  
+  .button:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .button:active:not(:disabled) {
+    transform: none;
+  }
+  
+  .spinner {
+    animation: none;
+  }
+}

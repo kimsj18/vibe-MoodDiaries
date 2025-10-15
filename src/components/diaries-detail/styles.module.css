@@ -1,0 +1,246 @@
+/* 컨테이너: flexbox를 활용한 와이어프레임 구조 */
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 1168px;
+  margin: 0 auto;
+}
+
+/* gap: 1168 * 64 */
+.gapLarge {
+  width: 1168px;
+  height: 64px;
+}
+
+/* detail-title: 1168 * 84 */
+.detailTitle {
+  width: 1168px;
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleSection {
+  width: 1168px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid black;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--typography-headline02-fontFamily);
+  font-weight: var(--typography-headline02-fontWeight);
+  font-size: var(--typography-headline02-fontSize);
+  line-height: var(--typography-headline02-lineHeight);
+  color: var(--color-text-primary);
+}
+
+.emotionAndDate {
+  width: 1168px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+}
+
+.emotionSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.emotionIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.emotionText {
+  font-family: var(--typography-headline03-fontFamily);
+  font-weight: var(--typography-headline03-fontWeight);
+  font-size: var(--typography-headline03-fontSize);
+  line-height: var(--typography-headline03-lineHeight);
+}
+
+.dateSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dateText,
+.createdText {
+  font-family: var(--typography-body02_s-fontFamily);
+  font-weight: var(--typography-body02_s-fontWeight);
+  font-size: var(--typography-body02_s-fontSize);
+  line-height: var(--typography-body02_s-lineHeight);
+  color: var(--color-text-tertiary);
+}
+
+/* gap: 1168 * 24 */
+.gap {
+  width: 1168px;
+  height: 24px;
+}
+
+/* detail-content: 1168 * 169 */
+.detailContent {
+  width: 1168px;
+  height: 169px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentArea {
+  width: 1168px;
+  height: 133px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentLabel {
+  margin: 0;
+  margin-bottom: 13px;
+  font-family: var(--typography-title02-fontFamily);
+  font-weight: var(--typography-title02-fontWeight);
+  font-size: var(--typography-title02-fontSize);
+  line-height: var(--typography-title02-lineHeight);
+  color: var(--color-text-primary);
+}
+
+.contentText {
+  margin: 0;
+  font-family: var(--typography-body01-fontFamily);
+  font-weight: var(--typography-body01-fontWeight);
+  font-size: var(--typography-body01-fontSize);
+  line-height: var(--typography-body01-lineHeight);
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.copySection {
+  width: 1168px;
+  height: 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.copyButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--typography-body01-fontFamily);
+  font-weight: var(--typography-body01-fontWeight);
+  font-size: var(--typography-body01-fontSize);
+  line-height: var(--typography-body01-lineHeight);
+  color: var(--color-text-primary);
+}
+
+.copyButton:hover {
+  opacity: 0.7;
+}
+
+/* detail-footer: 1168 * 56 */
+.detailFooter {
+  width: 1168px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom: 1px solid black;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 16px;
+}
+
+.editButton,
+.deleteButton {
+  width: 51px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-primary);
+  background-color: var(--color-background-primary);
+  font-family: var(--typography-title01-fontFamily);
+  font-weight: var(--typography-title01-fontWeight);
+  font-size: var(--typography-title01-fontSize);
+  color: var(--color-text-primary);
+}
+
+/* retrospect-input: 1168 * 85 */
+.retrospectInput {
+  width: 1168px;
+  height: 85px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+}
+
+.retrospectInput textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+}
+
+/* gap: 1168 * 16 */
+.gapSmall {
+  width: 1168px;
+  height: 16px;
+}
+
+/* retrospect-list: 1168 * 72 */
+.retrospectList {
+  width: 1168px;
+  height: 72px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}
+
+.retrospectList ul {
+  margin: 0;
+  padding: 16px;
+  list-style: none;
+  width: 100%;
+}
+
+.retrospectList li {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.retrospectList li:last-child {
+  margin-bottom: 0;
+}
+
+/* 추가 스타일 */
+.emotionIcon {
+  object-fit: contain;
+}
+
+.copyButton img {
+  object-fit: contain;
+}
