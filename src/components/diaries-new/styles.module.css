@@ -1,0 +1,175 @@
+/* 부모 컨테이너 - 640px * 560px */
+.wrapper {
+  width: 640px;
+  height: 560px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Header - full * 24px */
+.header {
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0;
+}
+
+/* Gap - full * 40px */
+.gap {
+  width: 100%;
+  height: 40px;
+}
+
+/* Emotion Box - full * 64px */
+.emotionBox {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.emotionItem {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.emotionItem:hover {
+  background-color: #e9ecef;
+}
+
+/* Input Title - full * 76px */
+.inputTitle {
+  width: 100%;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.inputTitle input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 0 12px;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.inputTitle input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.inputTitle input::placeholder {
+  color: #6c757d;
+}
+
+/* Input Content - full * 156px */
+.inputContent {
+  width: 100%;
+  height: 156px;
+  display: flex;
+  align-items: flex-start;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.inputContent textarea {
+  width: 100%;
+  height: 120px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.inputContent textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.inputContent textarea::placeholder {
+  color: #6c757d;
+}
+
+/* Footer - full * 48px */
+.footer {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.cancelBtn {
+  width: 80px;
+  height: 36px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #6c757d;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelBtn:hover {
+  background-color: #f8f9fa;
+  border-color: #adb5bd;
+}
+
+.saveBtn {
+  width: 80px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.saveBtn:hover {
+  background-color: #0056b3;
+}
