@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import React, { useState } from 'react';
 import styles from './styles.module.css';
@@ -8,6 +8,7 @@ import Button from '@/commons/components/button';
 import Pagination from '@/commons/components/pagination';
 import Image from 'next/image';
 import { EmotionType, getEmotionDisplayText, getEmotionColor } from '@/commons/constants/enum';
+import { useDiaryModal } from './hooks/index.link.modal.hook';
 
 type Diary = {
   id: string;
@@ -179,6 +180,9 @@ const Diaries: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 12; // 3행 * 4열 = 12개
   const totalPages = Math.ceil(mockDiaries.length / itemsPerPage);
+  
+  // 모달 훅 사용
+  const { openDiaryModal } = useDiaryModal();
 
   // 현재 페이지에 해당하는 일기 데이터
   const getCurrentPageDiaries = () => {
@@ -193,7 +197,7 @@ const Diaries: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="diaries-page">
       {/* 첫 번째 gap: 1168 * 32 */}
       <div className={styles.gap1}></div>
 
@@ -224,6 +228,7 @@ const Diaries: React.FC = () => {
             theme="light"
             size="large"
             className={styles.buttonWidth}
+            onClick={openDiaryModal}
           >
             일기쓰기
           </Button>

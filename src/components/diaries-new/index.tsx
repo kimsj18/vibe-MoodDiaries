@@ -4,12 +4,14 @@ import React, { useState } from 'react';
 import { Input } from '@/commons/components/input';
 import { Button } from '@/commons/components/button';
 import { EmotionType, EMOTION_CONFIG, getAllEmotionData } from '@/commons/constants/enum';
+import { useModal } from '@/commons/providers/modal/modal.provider';
 import styles from './styles.module.css';
 
 const DiariesNew = () => {
   const [selectedEmotion, setSelectedEmotion] = useState<EmotionType | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const { closeModal } = useModal();
 
   const emotionData = getAllEmotionData();
 
@@ -18,8 +20,7 @@ const DiariesNew = () => {
   };
 
   const handleClose = () => {
-    // 닫기 로직 구현
-    console.log('닫기 버튼 클릭');
+    closeModal();
   };
 
   const handleSubmit = () => {
