@@ -102,6 +102,8 @@ const DiariesNew = () => {
           theme="light"
           onClick={handleSubmit}
           className={styles.submitButton}
+          disabled={!title || !content}
+          
         >
           등록하기
         </Button>
