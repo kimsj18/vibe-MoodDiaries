@@ -229,6 +229,7 @@ const Diaries: React.FC = () => {
             size="large"
             className={styles.buttonWidth}
             onClick={openDiaryModal}
+            data-testid="diary-write-button"
           >
             일기쓰기
           </Button>

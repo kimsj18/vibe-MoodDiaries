@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('일기쓰기 모달 닫기 기능', () => {
+test.describe('일기쓰기 모달 닫기 기능 - TDD 기반 Playwright 테스트', () => {
   test.beforeEach(async ({ page }) => {
     // /diaries 페이지로 이동
     await page.goto('/diaries');
@@ -21,7 +21,7 @@ test.describe('일기쓰기 모달 닫기 기능', () => {
     
     // 등록취소 모달이 표시되는지 확인
     const cancelModal = page.locator('[data-testid="cancel-confirmation-modal"]');
-    await expect(cancelModal).toBeVisible();
+    await expect(cancelModal).toBeVisible({ timeout: 500 });
     
     // 기존 일기쓰기 모달도 여전히 존재하는지 확인 (2중 모달)
     const diaryModal = page.locator('[data-testid="diary-write-modal"]');
@@ -43,13 +43,13 @@ test.describe('일기쓰기 모달 닫기 기능', () => {
     await page.click('[data-testid="diary-close-button"]');
     
     // 등록취소 모달이 표시되는지 확인
-    await expect(page.locator('[data-testid="cancel-confirmation-modal"]')).toBeVisible();
+    await expect(page.locator('[data-testid="cancel-confirmation-modal"]')).toBeVisible({ timeout: 500 });
     
     // 계속작성 버튼 클릭
     await page.click('[data-testid="continue-writing-button"]');
     
     // 등록취소 모달이 닫혔는지 확인
-    await expect(page.locator('[data-testid="cancel-confirmation-modal"]')).not.toBeVisible();
+    await expect(page.locator('[data-testid="cancel-confirmation-modal"]')).not.toBeVisible({ timeout: 500 });
     
     // 일기쓰기 모달은 여전히 열려있는지 확인
     await expect(page.locator('[data-testid="diary-write-modal"]')).toBeVisible();
@@ -60,14 +60,14 @@ test.describe('일기쓰기 모달 닫기 기능', () => {
     await page.click('[data-testid="diary-close-button"]');
     
     // 등록취소 모달이 표시되는지 확인
-    await expect(page.locator('[data-testid="cancel-confirmation-modal"]')).toBeVisible();
+    await expect(page.locator('[data-testid="cancel-confirmation-modal"]')).toBeVisible({ timeout: 500 });
     
     // 등록취소 버튼 클릭
     await page.click('[data-testid="cancel-registration-button"]');
     
     // 모든 모달이 닫혔는지 확인
-    await expect(page.locator('[data-testid="cancel-confirmation-modal"]')).not.toBeVisible();
-    await expect(page.locator('[data-testid="diary-write-modal"]')).not.toBeVisible();
+    await expect(page.locator('[data-testid="cancel-confirmation-modal"]')).not.toBeVisible({ timeout: 500 });
+    await expect(page.locator('[data-testid="diary-write-modal"]')).not.toBeVisible({ timeout: 500 });
     
     // /diaries 페이지로 돌아갔는지 확인
     await expect(page.locator('[data-testid="diaries-page"]')).toBeVisible();
@@ -79,7 +79,7 @@ test.describe('일기쓰기 모달 닫기 기능', () => {
     
     // 등록취소 모달 확인
     const cancelModal = page.locator('[data-testid="cancel-confirmation-modal"]');
-    await expect(cancelModal).toBeVisible();
+    await expect(cancelModal).toBeVisible({ timeout: 500 });
     
     // Modal 컴포넌트가 info variant로 렌더링되는지 확인
     await expect(cancelModal.locator('.variant-info')).toBeVisible();

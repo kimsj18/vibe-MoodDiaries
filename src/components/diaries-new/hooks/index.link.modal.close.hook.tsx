@@ -1,11 +1,19 @@
+import React from 'react';
 import { useModal } from '@/commons/providers/modal/modal.provider';
 import { Modal } from '@/commons/components/modal';
 
+/**
+ * 일기쓰기 모달의 닫기 기능을 관리하는 훅
+ * 2중 모달 구조로 등록취소 확인 기능을 제공
+ */
 export const useModalClose = () => {
   const { openModal, closeModal, closeAllModals } = useModal();
 
+  /**
+   * 닫기 버튼 클릭 핸들러
+   * 등록취소 확인 모달을 2중 모달로 표시
+   */
   const handleClose = () => {
-    // 등록취소 확인 모달을 2중 모달로 표시
     const modalId = openModal(
       <div data-testid="cancel-confirmation-modal">
         <Modal
@@ -23,23 +31,28 @@ export const useModalClose = () => {
       </div>
     );
 
-    // 모달 ID를 저장하여 개별 제어 가능하도록 함
     return modalId;
   };
 
+  /**
+   * 계속작성 버튼 클릭 핸들러
+   * 등록취소 모달(자식)만 닫기
+   */
   const handleContinueWriting = () => {
-    // 등록취소 모달(자식)만 닫기
     closeModal();
   };
 
+  /**
+   * 등록취소 버튼 클릭 핸들러
+   * 모든 모달 닫기 (등록취소 모달 + 일기쓰기 모달)
+   */
   const handleCancelRegistration = () => {
-    // 모든 모달 닫기 (등록취소 모달 + 일기쓰기 모달)
     closeAllModals();
   };
 
   return {
     handleClose,
     handleContinueWriting,
-    handleCancelRegistration
+    handleCancelRegistration,
   };
 };

@@ -1,36 +1,22 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from '@/commons/components/input';
 import { Button } from '@/commons/components/button';
-import { EmotionType, EMOTION_CONFIG, getAllEmotionData } from '@/commons/constants/enum';
-import { useModal } from '@/commons/providers/modal/modal.provider';
+import { EmotionType, getAllEmotionData } from '@/commons/constants/enum';
 import { useModalClose } from './hooks/index.link.modal.close.hook';
+import { useFormHook } from './hooks/index.form.hook';
 import styles from './styles.module.css';
 
 const DiariesNew = () => {
-  const [selectedEmotion, setSelectedEmotion] = useState<EmotionType | null>(null);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const { closeModal } = useModal();
   const { handleClose } = useModalClose();
+  const { 
+    onSubmit, 
+    isSubmitEnabled, 
+    register
+  } = useFormHook();
 
   const emotionData = getAllEmotionData();
-
-  const handleEmotionSelect = (emotionType: EmotionType) => {
-    setSelectedEmotion(emotionType);
-  };
-
-  // handleClose는 useModalClose 훅에서 가져옴
-
-  const handleSubmit = () => {
-    // 등록하기 로직 구현
-    console.log('등록하기 버튼 클릭', {
-      emotion: selectedEmotion,
-      title,
-      content
-    });
-  };
 
   return (
     <div className={styles.wrapper} data-testid="diary-write-modal">
@@ -47,10 +33,8 @@ const DiariesNew = () => {
             <label key={emotion.type} className={styles.emotionRadio}>
               <input
                 type="radio"
-                name="emotion"
                 value={emotion.type}
-                checked={selectedEmotion === emotion.type}
-                onChange={() => handleEmotionSelect(emotion.type)}
+                {...register('emotion')}
                 className={styles.emotionRadioInput}
               />
               <span className={styles.emotionRadioLabel}>
@@ -69,8 +53,7 @@ const DiariesNew = () => {
           size="medium"
           theme="light"
           placeholder="제목을 입력합니다."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          {...register('title')}
           className={styles.titleInput}
         />
       </div>
@@ -81,8 +64,7 @@ const DiariesNew = () => {
         <textarea
           className={styles.contentTextarea}
           placeholder="내용을 입력합니다."
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
+          {...register('content')}
         />
       </div>
       
@@ -102,10 +84,9 @@ const DiariesNew = () => {
           variant="primary"
           size="medium"
           theme="light"
-          onClick={handleSubmit}
+          onClick={onSubmit}
           className={styles.submitButton}
-          disabled={!title || !content}
-          
+          disabled={!isSubmitEnabled}
         >
           등록하기
         </Button>
