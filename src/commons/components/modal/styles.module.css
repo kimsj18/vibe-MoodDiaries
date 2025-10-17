@@ -60,28 +60,94 @@
 }
 
 /* Single Button - 전체 너비 */
-.singleButton {
-  width: 432px !important;
-  height: 48px !important;
-  border-radius: 8px !important;
-  font-family: var(--font-family-korean-primary) !important;
-  font-weight: 600 !important; /* SemiBold */
-  font-size: 18px !important;
-  line-height: 24px !important;
-  letter-spacing: -0.18px !important;
+.buttonArea .singleButton {
+  width: 432px;
+  height: 48px;
+  border-radius: 8px;
+  font-family: var(--font-family-korean-primary);
+  font-weight: 600; /* SemiBold */
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.18px;
+  /* 피그마 디자인에 맞는 색상 */
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+.buttonArea .singleButton:hover:not(:disabled) {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+  transform: none;
+  box-shadow: none;
+}
+
+.buttonArea .singleButton:active:not(:disabled) {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Dual Buttons - 104px 고정 너비 */
-.dualButton {
-  width: 104px !important;
-  height: 48px !important;
-  border-radius: 8px !important;
-  font-family: var(--font-family-korean-primary) !important;
-  font-weight: 600 !important; /* SemiBold */
-  font-size: 18px !important;
-  line-height: 24px !important;
-  letter-spacing: -0.18px !important;
+.buttonArea .dualButton {
+  width: 104px;
+  height: 48px;
+  border-radius: 8px;
+  font-family: var(--font-family-korean-primary);
+  font-weight: 600; /* SemiBold */
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: -0.18px;
   flex-shrink: 0;
+}
+
+/* Dual Button - 첫 번째 버튼 (계속 작성) - Secondary 스타일 */
+.buttonArea .dualButton:first-child {
+  background-color: #ffffff !important;
+  color: #1c1c1c !important;
+  border-color: #000000 !important;
+}
+
+.buttonArea .dualButton:first-child:hover:not(:disabled) {
+  background-color: #ffffff !important;
+  color: #1c1c1c !important;
+  border-color: #000000 !important;
+  transform: none;
+  box-shadow: none;
+}
+
+.buttonArea .dualButton:first-child:active:not(:disabled) {
+  background-color: #ffffff !important;
+  color: #1c1c1c !important;
+  border-color: #000000 !important;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Dual Button - 두 번째 버튼 (등록 취소) - Primary 스타일 */
+.buttonArea .dualButton:last-child {
+  background-color: #000000 !important;
+  color: #f2f2f2 !important;
+  border-color: #000000 !important;
+}
+
+.buttonArea .dualButton:last-child:hover:not(:disabled) {
+  background-color: #000000 !important;
+  color: #f2f2f2 !important;
+  border-color: #000000 !important;
+  transform: none;
+  box-shadow: none;
+}
+
+.buttonArea .dualButton:last-child:active:not(:disabled) {
+  background-color: #000000 !important;
+  color: #f2f2f2 !important;
+  border-color: #000000 !important;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Theme Variants */
@@ -144,12 +210,12 @@
     width: calc(100% - 48px);
   }
   
-  .singleButton {
-    width: 100% !important;
+  .buttonArea .singleButton {
+    width: 100%;
   }
   
-  .dualButton {
-    width: calc(50% - 10.5px) !important;
+  .buttonArea .dualButton {
+    width: calc(50% - 10.5px);
     min-width: 80px;
   }
 }
