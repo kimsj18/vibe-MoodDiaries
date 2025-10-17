@@ -1,13 +1,20 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import styles from './styles.module.css';
+
+interface Modal {
+  id: string;
+  content: ReactNode;
+  zIndex: number;
+}
 
 interface ModalContextType {
-  isOpen: boolean;
-  openModal: (content: ReactNode) => void;
-  closeModal: () => void;
-  modalContent: ReactNode;
+  modals: Modal[];
+  openModal: (content: ReactNode) => string;
+  closeModal: (id?: string) => void;
+  closeAllModals: () => void;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -25,44 +32,75 @@ interface ModalProviderProps {
 }
 
 export default function ModalProvider({ children }: ModalProviderProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<ReactNode>(null);
+  const [modals, setModals] = useState<Modal[]>([]);
 
-  const openModal = (content: ReactNode) => {
-    setModalContent(content);
-    setIsOpen(true);
+  // Body 스크롤 제어
+  useEffect(() => {
+    if (modals.length > 0) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // 컴포넌트 언마운트 시 스크롤 복원
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [modals.length]);
+
+  const openModal = (content: ReactNode): string => {
+    const id = `modal-${Date.now()}-${Math.random()}`;
+    const zIndex = 50 + modals.length * 10; // 각 모달마다 z-index 증가
+    
+    setModals(prev => [...prev, { id, content, zIndex }]);
+    return id;
   };
 
-  const closeModal = () => {
-    setIsOpen(false);
-    setModalContent(null);
+  const closeModal = (id?: string) => {
+    if (id) {
+      // 특정 모달 닫기
+      setModals(prev => prev.filter(modal => modal.id !== id));
+    } else {
+      // 가장 최근 모달 닫기
+      setModals(prev => prev.slice(0, -1));
+    }
+  };
+
+  const closeAllModals = () => {
+    setModals([]);
   };
 
   const value = {
-    isOpen,
+    modals,
     openModal,
     closeModal,
-    modalContent,
+    closeAllModals,
   };
 
   return (
     <ModalContext.Provider value={value}>
       {children}
-      {isOpen && typeof window !== 'undefined' && 
-        createPortal(
-          <div className="fixed inset-0 z-50 flex items-center justify-center">
-            {/* Backdrop */}
+      {typeof window !== 'undefined' && 
+        modals.map((modal, index) => 
+          createPortal(
             <div 
-              className="fixed inset-0 bg-black/50" 
-              onClick={closeModal}
-            />
-            
-            {/* Modal Content - max-w-md, w-full 제거됨 */}
-            <div className="relative z-10 bg-white rounded-lg shadow-lg p-6">
-              {modalContent}
-            </div>
-          </div>,
-          document.body
+              key={modal.id}
+              className={styles.modalOverlay}
+              style={{ zIndex: modal.zIndex }}
+            >
+              {/* Backdrop - 각 모달마다 개별 backdrop */}
+              <div 
+                className={styles.backdrop}
+                onClick={() => closeModal(modal.id)}
+              />
+              
+              {/* Modal Content */}
+              <div className={styles.modalContent}>
+                {modal.content}
+              </div>
+            </div>,
+            document.body
+          )
         )
       }
     </ModalContext.Provider>
