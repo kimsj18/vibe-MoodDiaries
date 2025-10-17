@@ -5,20 +5,13 @@ import Image from 'next/image';
 import { Button } from '@/commons/components/button';
 import { Input } from '@/commons/components/input';
 import { EmotionType, getEmotionData } from '@/commons/constants/enum';
+import { useBindingHook } from './hooks/index.binding.hook';
 import styles from './styles.module.css';
 
 interface DiariesDetailProps {
   id: string;
 }
 
-// Mock 데이터
-const mockDiaryData = {
-  id: '1',
-  title: '이것은 타이틀 입니다.',
-  content: '내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다내용이 들어갑니다',
-  emotion: EmotionType.HAPPY,
-  createdAt: '2024. 07. 12',
-};
 
 // Mock 회고 데이터
 const mockRetrospectData = [
@@ -35,11 +28,22 @@ const mockRetrospectData = [
 ];
 
 const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
-  const emotionData = getEmotionData(mockDiaryData.emotion);
+  const { diaryData, isLoading, error } = useBindingHook(id);
   const [retrospectInput, setRetrospectInput] = useState('');
+  
+  // 로딩 중이거나 데이터가 없을 때의 처리
+  if (isLoading) {
+    return <div className={styles.container} data-testid="diary-detail-container">로딩 중...</div>;
+  }
+  
+  if (error || !diaryData) {
+    return <div className={styles.container} data-testid="diary-detail-container">데이터를 불러올 수 없습니다.</div>;
+  }
+  
+  const emotionData = getEmotionData(diaryData.emotion);
 
   const handleCopyContent = () => {
-    navigator.clipboard.writeText(mockDiaryData.content);
+    navigator.clipboard.writeText(diaryData.content);
     alert('내용이 복사되었습니다.');
   };
 
@@ -59,14 +63,14 @@ const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="diary-detail-container">
       {/* gap: 1168 * 64 */}
       <div className={styles.gapLarge}></div>
       
       {/* detail-title: 1168 * 84 */}
       <div className={styles.detailTitle}>
         <div className={styles.titleSection}>
-          <h1 className={styles.title}>{mockDiaryData.title}</h1>
+          <h1 className={styles.title} data-testid="diary-title">{diaryData.title}</h1>
         </div>
         <div className={styles.emotionAndDate}>
           <div className={styles.emotionSection}>
@@ -76,13 +80,14 @@ const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
               width={32}
               height={32}
               className={styles.emotionIcon}
+              data-testid="emotion-icon"
             />
-            <span className={styles.emotionText} style={{ color: emotionData.color }}>
+            <span className={styles.emotionText} style={{ color: emotionData.color }} data-testid="emotion-text">
               {emotionData.displayText}
             </span>
           </div>
           <div className={styles.dateSection}>
-            <span className={styles.dateText}>{mockDiaryData.createdAt}</span>
+            <span className={styles.dateText} data-testid="created-date">{diaryData.createdAt}</span>
             <span className={styles.createdText}>작성</span>
           </div>
         </div>
@@ -95,10 +100,10 @@ const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
       <div className={styles.detailContent}>
         <div className={styles.contentArea}>
           <h2 className={styles.contentLabel}>내용</h2>
-          <p className={styles.contentText}>{mockDiaryData.content}</p>
+          <p className={styles.contentText} data-testid="diary-content">{diaryData.content}</p>
         </div>
         <div className={styles.copySection}>
-          <button className={styles.copyButton} onClick={handleCopyContent}>
+          <button className={styles.copyButton} onClick={handleCopyContent} data-testid="copy-button">
             <Image
               src="/icons/copy_outline_light_m.svg"
               alt="복사"
