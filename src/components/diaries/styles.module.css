@@ -133,6 +133,7 @@
   background-color: var(--color-surface-primary);
   border: 1px solid var(--color-border-secondary);
   border-radius: 16px;
+  cursor: pointer;
 }
 
 .styles_cardImageWrapper {

@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { getEmotionDisplayText, getEmotionColor } from '@/commons/constants/enum';
 import { useDiaryModal } from './hooks/index.link.modal.hook';
 import { useDiaryBinding, getEmotionImages, truncateTitle } from './hooks/index.binding.hook';
+import { useDiaryLinkRouting } from './hooks/index.link.routing.hook';
 
 // 기존 Diary 타입은 DiaryData로 대체됨 (hooks/index.binding.hook.ts에서 import)
 
@@ -27,6 +28,9 @@ const Diaries: React.FC = () => {
   
   // 데이터 바인딩 훅 사용
   const { diaries, loading, error } = useDiaryBinding();
+  
+  // 링크 라우팅 훅 사용
+  const { handleCardClick, handleDeleteClick } = useDiaryLinkRouting();
   
   // 총 페이지 수 계산
   const totalPages = Math.ceil(diaries.length / itemsPerPage);
@@ -225,12 +229,17 @@ const Diaries: React.FC = () => {
               {getCurrentPageDiaries().map((diary) => {
                 const emotionImages = getEmotionImages(diary.emotion);
                 return (
-                  <div key={diary.id} className={styles.styles_diaryCard}>
+                  <div 
+                    key={diary.id} 
+                    className={styles.styles_diaryCard}
+                    onClick={handleCardClick(diary.id)}
+                  >
                     <div className={styles.styles_cardImageWrapper}>
                       <button
                         type="button"
                         className={styles.styles_closeButton}
                         aria-label="카드 닫기"
+                        onClick={handleDeleteClick}
                       >
                         <Image
                           src="/icons/close_outline_light_s.svg"
