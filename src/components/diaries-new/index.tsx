@@ -5,6 +5,7 @@ import { Input } from '@/commons/components/input';
 import { Button } from '@/commons/components/button';
 import { EmotionType, EMOTION_CONFIG, getAllEmotionData } from '@/commons/constants/enum';
 import { useModal } from '@/commons/providers/modal/modal.provider';
+import { useModalClose } from './hooks/index.link.modal.close.hook';
 import styles from './styles.module.css';
 
 const DiariesNew = () => {
@@ -12,6 +13,7 @@ const DiariesNew = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const { closeModal } = useModal();
+  const { handleClose } = useModalClose();
 
   const emotionData = getAllEmotionData();
 
@@ -19,9 +21,7 @@ const DiariesNew = () => {
     setSelectedEmotion(emotionType);
   };
 
-  const handleClose = () => {
-    closeModal();
-  };
+  // handleClose는 useModalClose 훅에서 가져옴
 
   const handleSubmit = () => {
     // 등록하기 로직 구현
@@ -33,7 +33,7 @@ const DiariesNew = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="diary-write-modal">
       {/* Header */}
       <div className={styles.header}>
         <h1 className={styles.headerTitle}>일기 쓰기</h1>
@@ -94,6 +94,7 @@ const DiariesNew = () => {
           theme="light"
           onClick={handleClose}
           className={styles.closeButton}
+          data-testid="diary-close-button"
         >
           닫기
         </Button>

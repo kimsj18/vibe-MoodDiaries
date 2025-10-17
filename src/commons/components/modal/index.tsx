@@ -18,6 +18,8 @@ export interface ModalProps {
   onConfirm?: () => void;
   onCancel?: () => void;
   isOpen?: boolean;
+  confirmTestId?: string;
+  cancelTestId?: string;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -30,7 +32,9 @@ export const Modal: React.FC<ModalProps> = ({
   cancelText = '취소',
   onConfirm,
   onCancel,
-  isOpen = true
+  isOpen = true,
+  confirmTestId,
+  cancelTestId
 }) => {
   const { theme: systemTheme } = useTheme();
   const resolvedTheme: ModalTheme = (theme || (systemTheme as ModalTheme) || 'light');
@@ -71,6 +75,7 @@ export const Modal: React.FC<ModalProps> = ({
           size="large"
           onClick={onCancel}
           className={styles.dualButton}
+          data-testid={cancelTestId}
         >
           {cancelText}
         </Button>
@@ -80,6 +85,7 @@ export const Modal: React.FC<ModalProps> = ({
           size="large"
           onClick={onConfirm}
           className={styles.dualButton}
+          data-testid={confirmTestId}
         >
           {confirmText}
         </Button>
