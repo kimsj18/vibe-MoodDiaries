@@ -1,0 +1,173 @@
+/* Modal Base Styles */
+.modal {
+  width: 480px;
+  height: 200px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.content {
+  width: 432px;
+  height: 152px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Text Area */
+.textArea {
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-family-korean-primary);
+  font-weight: 700; /* Bold */
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: -0.24px;
+  color: #000000;
+  margin: 0;
+  text-align: center;
+}
+
+.message {
+  font-family: var(--font-family-korean-primary);
+  font-weight: 500; /* Medium */
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  color: #333333;
+  margin: 0;
+  text-align: center;
+}
+
+/* Button Area */
+.buttonArea {
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 21px; /* 피그마에서 두 버튼 사이 간격 */
+}
+
+/* Single Button - 전체 너비 */
+.singleButton {
+  width: 432px !important;
+  height: 48px !important;
+  border-radius: 8px !important;
+  font-family: var(--font-family-korean-primary) !important;
+  font-weight: 600 !important; /* SemiBold */
+  font-size: 18px !important;
+  line-height: 24px !important;
+  letter-spacing: -0.18px !important;
+}
+
+/* Dual Buttons - 104px 고정 너비 */
+.dualButton {
+  width: 104px !important;
+  height: 48px !important;
+  border-radius: 8px !important;
+  font-family: var(--font-family-korean-primary) !important;
+  font-weight: 600 !important; /* SemiBold */
+  font-size: 18px !important;
+  line-height: 24px !important;
+  letter-spacing: -0.18px !important;
+  flex-shrink: 0;
+}
+
+/* Theme Variants */
+.theme-light {
+  background-color: #ffffff;
+}
+
+.theme-light .title {
+  color: #000000;
+}
+
+.theme-light .message {
+  color: #333333;
+}
+
+.theme-dark {
+  background-color: #1a1a1a;
+}
+
+.theme-dark .title {
+  color: #ffffff;
+}
+
+.theme-dark .message {
+  color: #cccccc;
+}
+
+/* Variant Styles */
+.variant-info {
+  /* 기본 info 스타일 */
+}
+
+.variant-danger .title {
+  color: #dc2626;
+}
+
+.variant-danger.theme-dark .title {
+  color: #ef4444;
+}
+
+/* Actions Layout */
+.actions-single .buttonArea {
+  justify-content: center;
+}
+
+.actions-dual .buttonArea {
+  justify-content: center;
+  gap: 21px;
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+  .modal {
+    width: calc(100vw - 32px);
+    max-width: 480px;
+    margin: 0 16px;
+  }
+  
+  .content {
+    width: calc(100% - 48px);
+  }
+  
+  .singleButton {
+    width: 100% !important;
+  }
+  
+  .dualButton {
+    width: calc(50% - 10.5px) !important;
+    min-width: 80px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .modal {
+    border: 2px solid #000000;
+  }
+  
+  .theme-dark .modal {
+    border-color: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .modal {
+    transition: none;
+  }
+}
