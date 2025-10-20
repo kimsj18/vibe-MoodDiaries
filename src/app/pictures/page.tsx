@@ -1,10 +1,10 @@
 import React from 'react';
+import Pictures from '@/components/pictures';
 
 export default function PicturesPage() {
   return (
     <div data-testid="pictures-page">
-      <h1>사진보관함</h1>
-      <p>사진목록 페이지입니다.</p>
+      <Pictures />
     </div>
   );
 }

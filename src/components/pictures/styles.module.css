@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 1168px;
+}
+
+.gap {
+  width: 1168px;
+  height: 32px;
+  background-color: white;
+}
+
+.gap:nth-of-type(2) {
+  height: 42px;
+  background-color: white;
+
+}
+
+.filter {
+  width: 1168px;
+  height: 48px;
+}
+
+.main {
+  width: 1168px;
+  height: auto;
+}
