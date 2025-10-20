@@ -60,6 +60,7 @@ export const Modal: React.FC<ModalProps> = ({
             size="large"
             onClick={onConfirm}
             className={styles.singleButton}
+            data-testid={confirmTestId}
           >
             {confirmText}
           </Button>

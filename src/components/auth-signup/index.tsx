@@ -3,6 +3,7 @@
 import React from 'react';
 import { Input } from '@/commons/components/input';
 import { Button } from '@/commons/components/button';
+import { useSignupForm } from './hooks/index.form.hook';
 import styles from './styles.module.css';
 
 export interface AuthSignupProps {
@@ -10,6 +11,8 @@ export interface AuthSignupProps {
 }
 
 export const AuthSignup: React.FC<AuthSignupProps> = ({ className = '' }) => {
+  const { form, onSubmit, isFormValid, isSubmitting, errors } = useSignupForm();
+
   return (
     <div className={`${styles.container} ${className}`}>
       <div className={styles.content}>
@@ -22,7 +25,7 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = '' }) => {
         </div>
 
         {/* 폼 */}
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={onSubmit} data-testid="auth-signup-form">
           <div className={styles.inputGroup}>
             <Input
               variant="primary"
@@ -32,7 +35,15 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = '' }) => {
               placeholder="이메일을 입력해주세요"
               type="email"
               className={styles.input}
+              data-testid="email-input"
+              {...form.register('email')}
+              error={!!errors.email?.message}
             />
+            {errors.email && (
+              <span className={styles.errorMessage} data-testid="email-error">
+                {errors.email.message}
+              </span>
+            )}
           </div>
 
           <div className={styles.inputGroup}>
@@ -44,7 +55,15 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = '' }) => {
               placeholder="비밀번호를 입력해주세요"
               type="password"
               className={styles.input}
+              data-testid="password-input"
+              {...form.register('password')}
+              error={!!errors.password?.message}
             />
+            {errors.password && (
+              <span className={styles.errorMessage} data-testid="password-error">
+                {errors.password.message}
+              </span>
+            )}
           </div>
 
           <div className={styles.inputGroup}>
@@ -56,7 +75,15 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = '' }) => {
               placeholder="비밀번호를 다시 입력해주세요"
               type="password"
               className={styles.input}
+              data-testid="password-confirm-input"
+              {...form.register('passwordConfirm')}
+              error={!!errors.passwordConfirm?.message}
             />
+            {errors.passwordConfirm && (
+              <span className={styles.errorMessage} data-testid="password-confirm-error">
+                {errors.passwordConfirm.message}
+              </span>
+            )}
           </div>
 
           <div className={styles.inputGroup}>
@@ -68,7 +95,15 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = '' }) => {
               placeholder="이름을 입력해주세요"
               type="text"
               className={styles.input}
+              data-testid="name-input"
+              {...form.register('name')}
+              error={!!errors.name?.message}
             />
+            {errors.name && (
+              <span className={styles.errorMessage} data-testid="name-error">
+                {errors.name.message}
+              </span>
+            )}
           </div>
 
           <div className={styles.buttonGroup}>
@@ -78,8 +113,11 @@ export const AuthSignup: React.FC<AuthSignupProps> = ({ className = '' }) => {
               size="large"
               fullWidth
               className={styles.signupButton}
+              data-testid="signup-button"
+              type="submit"
+              disabled={!isFormValid || isSubmitting}
             >
-              회원가입
+              {isSubmitting ? '가입 중...' : '회원가입'}
             </Button>
           </div>
 

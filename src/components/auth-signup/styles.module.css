@@ -58,6 +58,17 @@
   width: 100%;
 }
 
+/* 오류 메시지 */
+.errorMessage {
+  font-family: var(--font-family-korean-primary);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-danger);
+  margin-top: 0.25rem;
+  display: block;
+}
+
 /* 버튼 그룹 */
 .buttonGroup {
   margin-top: 0.5rem;
