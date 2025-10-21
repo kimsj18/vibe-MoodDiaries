@@ -3,6 +3,7 @@
 import React from 'react';
 import { Input } from '@/commons/components/input';
 import { Button } from '@/commons/components/button';
+import { useAuthLoginForm } from './hooks/index.form.hook';
 import styles from './styles.module.css';
 
 export interface AuthLoginProps {
@@ -10,8 +11,16 @@ export interface AuthLoginProps {
 }
 
 export const AuthLogin: React.FC<AuthLoginProps> = ({ className = '' }) => {
+  const {
+    register,
+    handleSubmit,
+    errors,
+    isButtonEnabled,
+    isLoading,
+  } = useAuthLoginForm();
+
   return (
-    <div className={`${styles.container} ${className}`}>
+    <div className={`${styles.container} ${className}`} data-testid="auth-login-container">
       <div className={styles.content}>
         {/* 헤더 */}
         <div className={styles.header}>
@@ -20,7 +29,7 @@ export const AuthLogin: React.FC<AuthLoginProps> = ({ className = '' }) => {
         </div>
 
         {/* 폼 */}
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
             <Input
               id="email"
@@ -32,7 +41,14 @@ export const AuthLogin: React.FC<AuthLoginProps> = ({ className = '' }) => {
               size="large"
               fullWidth
               className={styles.input}
+              data-testid="email-input"
+              {...register('email')}
             />
+            {errors.email && (
+              <span className={styles.errorMessage} data-testid="email-error">
+                {errors.email.message}
+              </span>
+            )}
           </div>
 
           <div className={styles.inputGroup}>
@@ -46,7 +62,14 @@ export const AuthLogin: React.FC<AuthLoginProps> = ({ className = '' }) => {
               size="large"
               fullWidth
               className={styles.input}
+              data-testid="password-input"
+              {...register('password')}
             />
+            {errors.password && (
+              <span className={styles.errorMessage} data-testid="password-error">
+                {errors.password.message}
+              </span>
+            )}
           </div>
 
           <div className={styles.buttonGroup}>
@@ -57,8 +80,10 @@ export const AuthLogin: React.FC<AuthLoginProps> = ({ className = '' }) => {
               size="large"
               fullWidth
               className={styles.loginButton}
+              disabled={!isButtonEnabled}
+              data-testid="login-button"
             >
-              로그인
+              {isLoading ? '로그인 중...' : '로그인'}
             </Button>
           </div>
         </form>

@@ -58,6 +58,16 @@
   width: 100%;
 }
 
+.errorMessage {
+  font-family: var(--typography-body03-fontFamily);
+  font-weight: var(--typography-body03-fontWeight);
+  font-size: var(--typography-body03-fontSize);
+  line-height: var(--typography-body03-lineHeight);
+  color: var(--color-status-danger);
+  margin-top: 0.25rem;
+  display: block;
+}
+
 /* 버튼 그룹 */
 .buttonGroup {
   margin-top: 0.5rem;
