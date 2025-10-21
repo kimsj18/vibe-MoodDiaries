@@ -173,12 +173,12 @@ test.describe('로그인 폼 테스트', () => {
   });
 
   test.describe('모달 동작 테스트', () => {
-    test('성공 모달은 한 번만 표시되어야 함', async ({ page }) => {
+    test('로그인 성공 시 모달이 표시되고 확인 클릭 시 일기목록 페이지로 이동해야 함', async ({ page }) => {
       // Given: 유효한 로그인 정보
       const email = 'a@c.com';
       const password = '1234qwer';
 
-      // When: 첫 번째 로그인 시도
+      // When: 로그인 시도
       await page.fill('[data-testid="email-input"]', email);
       await page.fill('[data-testid="password-input"]', password);
       await page.click('[data-testid="login-button"]');
@@ -190,14 +190,7 @@ test.describe('로그인 폼 테스트', () => {
       // When: 모달 확인 버튼 클릭
       await page.click('[data-testid="modal-confirm-button"]');
 
-      // When: 다시 로그인 페이지로 돌아가서 같은 시도
-      await page.goto('/auth/login');
-      await page.waitForSelector('[data-testid="auth-login-container"]');
-      await page.fill('[data-testid="email-input"]', email);
-      await page.fill('[data-testid="password-input"]', password);
-      await page.click('[data-testid="login-button"]');
-
-      // Then: 모달이 다시 나타나지 않고 바로 페이지 이동
+      // Then: 일기목록 페이지로 이동
       await expect(page).toHaveURL('/diaries', { timeout: 2000 });
     });
   });

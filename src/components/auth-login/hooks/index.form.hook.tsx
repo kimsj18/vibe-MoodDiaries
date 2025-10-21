@@ -82,13 +82,6 @@ const fetchUserLoggedIn = async (accessToken: string) => {
 export const useAuthLoginForm = () => {
   const router = useRouter();
   const { openModal, closeAllModals } = useModal();
-  const [hasShownSuccessModal, setHasShownSuccessModal] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('hasShownLoginSuccessModal') === 'true';
-    }
-    return false;
-  });
-  const [hasShownErrorModal, setHasShownErrorModal] = useState(false);
 
   // React Hook Form 설정
   const {
@@ -122,63 +115,33 @@ export const useAuthLoginForm = () => {
           name: userData.name,
         }));
 
-        // 성공 모달 표시 (한 번만)
-        if (!hasShownSuccessModal) {
-          setHasShownSuccessModal(true);
-          localStorage.setItem('hasShownLoginSuccessModal', 'true');
-          openModal(
-            <div data-testid="login-success-modal">
-              <Modal
-                variant="info"
-                actions="single"
-                title="로그인 성공"
-                message="로그인이 완료되었습니다."
-                onConfirm={() => {
-                  closeAllModals();
-                  router.push(URLS.DIARIES.LIST);
-                }}
-                confirmTestId="modal-confirm-button"
-              />
-            </div>
-          );
-        } else {
-          // 이미 모달을 보여준 경우 바로 페이지 이동
-          router.push(URLS.DIARIES.LIST);
-        }
+        // 로그인 완료 모달 표시
+        openModal(
+          <div data-testid="login-success-modal">
+            <Modal
+              variant="info"
+              actions="single"
+              title="로그인 성공"
+              message="로그인이 완료되었습니다."
+              onConfirm={() => {
+                closeAllModals();
+                router.push(URLS.DIARIES.LIST);
+              }}
+              confirmTestId="modal-confirm-button"
+            />
+          </div>
+        );
       } catch (error) {
         // 사용자 정보 조회 실패 시 에러 처리
         console.error('사용자 정보 조회 실패:', error);
         
-        if (!hasShownErrorModal) {
-          setHasShownErrorModal(true);
-          openModal(
-            <div data-testid="login-error-modal">
-              <Modal
-                variant="danger"
-                actions="single"
-                title="로그인 실패"
-                message="로그인 중 오류가 발생했습니다."
-                onConfirm={() => {
-                  closeAllModals();
-                }}
-                confirmTestId="modal-confirm-button"
-              />
-            </div>
-          );
-        }
-      }
-    },
-    onError: (error) => {
-      // 로그인 실패 모달 표시 (한 번만)
-      if (!hasShownErrorModal) {
-        setHasShownErrorModal(true);
         openModal(
           <div data-testid="login-error-modal">
             <Modal
               variant="danger"
               actions="single"
               title="로그인 실패"
-              message={error.message || '로그인에 실패했습니다.'}
+              message="로그인 중 오류가 발생했습니다."
               onConfirm={() => {
                 closeAllModals();
               }}
@@ -187,6 +150,23 @@ export const useAuthLoginForm = () => {
           </div>
         );
       }
+    },
+    onError: (error) => {
+      // 로그인 실패 모달 표시
+      openModal(
+        <div data-testid="login-error-modal">
+          <Modal
+            variant="danger"
+            actions="single"
+            title="로그인 실패"
+            message={error.message || '로그인에 실패했습니다.'}
+            onConfirm={() => {
+              closeAllModals();
+            }}
+            confirmTestId="modal-confirm-button"
+          />
+        </div>
+      );
     },
   });
 
