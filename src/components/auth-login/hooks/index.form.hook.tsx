@@ -115,6 +115,9 @@ export const useAuthLoginForm = () => {
           name: userData.name,
         }));
 
+        // 인증 상태 변경 이벤트 발생
+        window.dispatchEvent(new Event('authChange'));
+
         // 로그인 완료 모달 표시
         openModal(
           <div data-testid="login-success-modal">

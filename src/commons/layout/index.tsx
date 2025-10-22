@@ -5,6 +5,7 @@ import Image from 'next/image';
 import styles from './styles.module.css';
 import { useLinkRouting } from './hooks/index.link.routing.hook';
 import { useAreaVisibility } from './hooks/index.area.hook';
+import { useAuthStatus } from './hooks/index.auth.hook';
 import Button from '@/commons/components/button';
 
 interface LayoutProps {
@@ -28,6 +29,13 @@ export default function Layout({ children }: LayoutProps) {
         isFooterVisible,
     } = useAreaVisibility();
 
+    const {
+        isLoggedIn,
+        handleLoginClick,
+        handleLogoutClick,
+        getUserName,
+    } = useAuthStatus();
+
     return (
         <div className={styles.layout} data-testid="layout">
             {isHeaderVisible && (
@@ -41,17 +49,38 @@ export default function Layout({ children }: LayoutProps) {
                             민지의 다이어리
                         </div>
                     )}
-                    {/* 인증 상태 UI - 로그인 상태일 때만 표시 */}
+                    {/* 인증 상태 UI - 로그인 상태에 따라 분기 */}
                     <div className={styles.authStatus}>
-                        <span className={styles.userName}>민지님</span>
-                        <Button
-                            variant="secondary"
-                            theme="light"
-                            size="medium"
-                            className={styles.logoutButton}
-                        >
-                            로그아웃
-                        </Button>
+                        {isLoggedIn ? (
+                            <>
+                                <span 
+                                    className={styles.userName}
+                                    data-testid="user-name"
+                                >
+                                    {getUserName()}님
+                                </span>
+                                <Button
+                                    variant="secondary"
+                                    theme="light"
+                                    size="medium"
+                                    className={styles.logoutButton}
+                                    onClick={handleLogoutClick}
+                                    data-testid="logout-button"
+                                >
+                                    로그아웃
+                                </Button>
+                            </>
+                        ) : (
+                            <Button
+                                variant="primary"
+                                theme="light"
+                                size="medium"
+                                onClick={handleLoginClick}
+                                data-testid="login-button"
+                            >
+                                로그인
+                            </Button>
+                        )}
                     </div>
                 </header>
             )}
