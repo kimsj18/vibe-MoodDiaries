@@ -10,6 +10,7 @@
   height: 60px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 0 0 0;
 }
 
@@ -145,4 +146,23 @@
   line-height: 16px;
   letter-spacing: -0.14px;
   color: #919191;
+}
+
+/* 인증 상태 UI 스타일 */
+.authStatus {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.userName {
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 22px;
+  color: #000000;
+}
+
+.logoutButton {
+  width: 80px;
 }
