@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/commons/components/button';
 import { Input } from '@/commons/components/input';
 import { EmotionType, getEmotionData } from '@/commons/constants/enum';
 import { useBindingHook } from './hooks/index.binding.hook';
+import { useRetrospectFormHook } from './hooks/index.retrospect.form.hook';
 import styles from './styles.module.css';
 
 interface DiariesDetailProps {
@@ -13,23 +14,35 @@ interface DiariesDetailProps {
 }
 
 
-// Mock 회고 데이터
-const mockRetrospectData = [
-  {
-    id: '1',
-    content: '3년이 지나고 다시 보니 이때가 그립다.',
-    createdAt: '2024. 09. 24',
-  },
-  {
-    id: '2',
-    content: '3년이 지나고 다시 보니 이때가 그립다.',
-    createdAt: '2024. 09. 24',
-  },
-];
+// 회고 데이터를 로컬스토리지에서 가져오는 함수
+const getRetrospectData = (diaryId: number) => {
+  if (typeof window === 'undefined') return [];
+  
+  try {
+    const retrospectsJson = localStorage.getItem('retrospects');
+    if (!retrospectsJson) return [];
+    
+    const retrospects = JSON.parse(retrospectsJson);
+    return retrospects.filter((retrospect: any) => retrospect.diaryId === diaryId);
+  } catch (error) {
+    console.error('회고 데이터 로딩 중 오류:', error);
+    return [];
+  }
+};
 
 const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
   const { diaryData, isLoading, error } = useBindingHook(id);
-  const [retrospectInput, setRetrospectInput] = useState('');
+  const { form, onSubmit, isSubmitEnabled } = useRetrospectFormHook(parseInt(id, 10));
+  const [retrospectData, setRetrospectData] = useState<any[]>([]);
+  
+  // 회고 데이터 로드
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const diaryId = parseInt(id, 10);
+      const data = getRetrospectData(diaryId);
+      setRetrospectData(data);
+    }
+  }, [id]);
   
   // 로딩 중이거나 데이터가 없을 때의 처리
   if (isLoading) {
@@ -55,12 +68,7 @@ const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
     console.log('삭제 버튼 클릭');
   };
 
-  const handleRetrospectSubmit = () => {
-    if (retrospectInput.trim()) {
-      console.log('회고 입력:', retrospectInput);
-      setRetrospectInput('');
-    }
-  };
+  const handleRetrospectSubmit = form.handleSubmit(onSubmit);
 
   return (
     <div className={styles.container} data-testid="diary-detail-container">
@@ -148,26 +156,26 @@ const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
       {/* retrospect-input: 1168 * 85 */}
       <div className={styles.retrospectInput}>
         <h2 className={styles.retrospectLabel}>회고</h2>
-        <div className={styles.retrospectInputContainer}>
+        <form onSubmit={handleRetrospectSubmit} className={styles.retrospectInputContainer}>
           <Input
             variant="primary"
             size="large"
             theme="light"
             placeholder="회고를 남겨보세요."
-            value={retrospectInput}
-            onChange={(e) => setRetrospectInput(e.target.value)}
+            {...form.register('content')}
             className={styles.retrospectInputField}
           />
           <Button
             variant="primary"
             size="large"
             theme="light"
-            onClick={handleRetrospectSubmit}
+            type="submit"
+            disabled={!isSubmitEnabled}
             className={styles.retrospectSubmitButton}
           >
             입력
           </Button>
-        </div>
+        </form>
       </div>
       
       {/* gap: 1168 * 16 */}
@@ -175,13 +183,13 @@ const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
       
       {/* retrospect-list: 1168 * 72 */}
       <div className={styles.retrospectList}>
-        {mockRetrospectData.map((retrospect, index) => (
+        {retrospectData.map((retrospect, index) => (
           <React.Fragment key={retrospect.id}>
             <div className={styles.retrospectItem}>
               <span className={styles.retrospectContent}>{retrospect.content}</span>
               <span className={styles.retrospectDate}>[{retrospect.createdAt}]</span>
             </div>
-            {index < mockRetrospectData.length - 1 && <div className={styles.retrospectDivider}></div>}
+            {index < retrospectData.length - 1 && <div className={styles.retrospectDivider}></div>}
           </React.Fragment>
         ))}
       </div>

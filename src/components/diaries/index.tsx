@@ -11,6 +11,7 @@ import { getEmotionDisplayText, getEmotionColor } from '@/commons/constants/enum
 import { useDiaryModal } from './hooks/index.link.modal.hook';
 import { useDiaryBinding, getEmotionImages, truncateTitle } from './hooks/index.binding.hook';
 import { useDiaryLinkRouting } from './hooks/index.link.routing.hook';
+import { useDiarySearch } from './hooks/index.search.hook';
 
 // 기존 Diary 타입은 DiaryData로 대체됨 (hooks/index.binding.hook.ts에서 import)
 
@@ -32,14 +33,23 @@ const Diaries: React.FC = () => {
   // 링크 라우팅 훅 사용
   const { handleCardClick, handleDeleteClick } = useDiaryLinkRouting();
   
-  // 총 페이지 수 계산
-  const totalPages = Math.ceil(diaries.length / itemsPerPage);
+  // 검색 훅 사용
+  const { searchTerm, filteredDiaries, isSearching, handleSearch, handleClearSearch } = useDiarySearch(diaries);
+  
+  // 검색 시 페이지를 첫 페이지로 리셋
+  const handleSearchWithPageReset = (term: string) => {
+    handleSearch(term);
+    setCurrentPage(1);
+  };
+  
+  // 총 페이지 수 계산 (검색된 결과 기준)
+  const totalPages = Math.ceil(filteredDiaries.length / itemsPerPage);
 
-  // 현재 페이지에 해당하는 일기 데이터
+  // 현재 페이지에 해당하는 일기 데이터 (검색된 결과 기준)
   const getCurrentPageDiaries = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return diaries.slice(startIndex, endIndex);
+    return filteredDiaries.slice(startIndex, endIndex);
   };
 
   // 페이지 변경 핸들러
@@ -69,6 +79,9 @@ const Diaries: React.FC = () => {
                 size="large"
                 placeholder="검색어를 입력해 주세요."
                 className={styles.searchWidth}
+                onSearch={handleSearchWithPageReset}
+                onClear={handleClearSearch}
+                loading={isSearching}
               />
             </div>
             <Button
@@ -132,6 +145,9 @@ const Diaries: React.FC = () => {
                 size="large"
                 placeholder="검색어를 입력해 주세요."
                 className={styles.searchWidth}
+                onSearch={handleSearchWithPageReset}
+                onClear={handleClearSearch}
+                loading={isSearching}
               />
             </div>
             <Button
@@ -198,6 +214,9 @@ const Diaries: React.FC = () => {
               size="large"
               placeholder="검색어를 입력해 주세요."
               className={styles.searchWidth}
+              onSearch={handleSearchWithPageReset}
+              onClear={handleClearSearch}
+              loading={isSearching}
             />
           </div>
 
@@ -220,9 +239,14 @@ const Diaries: React.FC = () => {
       {/* Main 영역: 1168 * 936 */}
       <div className={styles.main}>
         <div className={styles.mainContent}>
-          {diaries.length === 0 ? (
+          {filteredDiaries.length === 0 ? (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-              <p>작성된 일기가 없습니다. 새로운 일기를 작성해보세요!</p>
+              <p>
+                {searchTerm ? 
+                  `"${searchTerm}"에 대한 검색 결과가 없습니다.` : 
+                  '작성된 일기가 없습니다. 새로운 일기를 작성해보세요!'
+                }
+              </p>
             </div>
           ) : (
             <div className={styles.cardGrid}>

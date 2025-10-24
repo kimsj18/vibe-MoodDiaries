@@ -110,6 +110,65 @@ export const getAllEmotionData = (): EmotionData[] => {
   return Object.values(EMOTION_CONFIG);
 };
 
+// Picture Filter enum
+export enum PictureFilterType {
+  DEFAULT = 'default',
+  HORIZONTAL = 'horizontal',
+  VERTICAL = 'vertical',
+}
+
+// Picture Filter data interface
+export interface PictureFilterData {
+  type: PictureFilterType;
+  displayText: string;
+  imageSize: {
+    width: number;
+    height: number;
+  };
+}
+
+// Picture Filter configuration mapping
+export const PICTURE_FILTER_CONFIG: Record<PictureFilterType, PictureFilterData> = {
+  [PictureFilterType.DEFAULT]: {
+    type: PictureFilterType.DEFAULT,
+    displayText: '기본',
+    imageSize: { width: 640, height: 640 },
+  },
+  [PictureFilterType.HORIZONTAL]: {
+    type: PictureFilterType.HORIZONTAL,
+    displayText: '가로형',
+    imageSize: { width: 640, height: 480 },
+  },
+  [PictureFilterType.VERTICAL]: {
+    type: PictureFilterType.VERTICAL,
+    displayText: '세로형',
+    imageSize: { width: 480, height: 640 },
+  },
+} as const;
+
+// Utility functions for picture filter handling
+export const getPictureFilterData = (type: PictureFilterType): PictureFilterData => {
+  return PICTURE_FILTER_CONFIG[type];
+};
+
+export const getPictureFilterDisplayText = (type: PictureFilterType): string => {
+  return PICTURE_FILTER_CONFIG[type].displayText;
+};
+
+export const getPictureFilterImageSize = (type: PictureFilterType) => {
+  return PICTURE_FILTER_CONFIG[type].imageSize;
+};
+
+export const getAllPictureFilterTypes = (): PictureFilterType[] => {
+  return Object.values(PictureFilterType);
+};
+
+export const getAllPictureFilterData = (): PictureFilterData[] => {
+  return Object.values(PICTURE_FILTER_CONFIG);
+};
+
 // Export types for TypeScript
 export type EmotionTypeKey = keyof typeof EmotionType;
 export type EmotionConfigKey = keyof typeof EMOTION_CONFIG;
+export type PictureFilterTypeKey = keyof typeof PictureFilterType;
+export type PictureFilterConfigKey = keyof typeof PICTURE_FILTER_CONFIG;
