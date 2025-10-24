@@ -124,7 +124,6 @@ export const SelectBox = forwardRef<HTMLDivElement, SelectBoxProps>(
     
     // Handle option selection
     const handleOptionSelect = useCallback((optionValue: string | number) => {
-      console.log('SelectBox handleOptionSelect 호출됨:', optionValue, 'multiple:', multiple, 'onChange 존재:', !!onChange);
       if (multiple) {
         const currentValues = Array.isArray(selectedValue) ? selectedValue : [];
         const newValues = currentValues.includes(optionValue)
@@ -135,9 +134,7 @@ export const SelectBox = forwardRef<HTMLDivElement, SelectBoxProps>(
         onChange?.(newValues);
       } else {
         setSelectedValue(optionValue);
-        console.log('onChange 호출 전:', optionValue);
         onChange?.(optionValue);
-        console.log('onChange 호출 후');
         setIsOpen(false);
       }
     }, [selectedValue, multiple, onChange]);
@@ -361,7 +358,7 @@ export const SelectBox = forwardRef<HTMLDivElement, SelectBoxProps>(
         
         {/* Dropdown */}
         {isOpen && (
-          <div className={styles.dropdown} style={{ maxHeight }}>
+          <div className={styles.dropdown} style={{ maxHeight }} data-testid="filter-dropdown">
             {/* Search input */}
             {searchable && (
               <div className={styles.searchContainer}>
@@ -417,13 +414,16 @@ export const SelectBox = forwardRef<HTMLDivElement, SelectBoxProps>(
                           aria-selected={isSelected}
                           data-testid={`filter-option-${option.value}`}
                           onClick={(e) => {
-                            console.log('옵션 클릭됨:', option.value, option.label, 'disabled:', option.disabled);
                             e.preventDefault();
                             e.stopPropagation();
                             if (!option.disabled) {
                               handleOptionSelect(option.value);
-                            } else {
-                              console.log('옵션이 비활성화되어 있음');
+                            }
+                          }}
+                          onMouseDown={(e) => {
+                            e.preventDefault();
+                            if (!option.disabled) {
+                              handleOptionSelect(option.value);
                             }
                           }}
                         >

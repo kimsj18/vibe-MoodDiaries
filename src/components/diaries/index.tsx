@@ -12,6 +12,7 @@ import { useDiaryModal } from './hooks/index.link.modal.hook';
 import { useDiaryBinding, getEmotionImages, truncateTitle } from './hooks/index.binding.hook';
 import { useDiaryLinkRouting } from './hooks/index.link.routing.hook';
 import { useDiarySearch } from './hooks/index.search.hook';
+import { useDiaryFilter } from './hooks/index.filter.hook';
 
 // 기존 Diary 타입은 DiaryData로 대체됨 (hooks/index.binding.hook.ts에서 import)
 
@@ -34,7 +35,10 @@ const Diaries: React.FC = () => {
   const { handleCardClick, handleDeleteClick } = useDiaryLinkRouting();
   
   // 검색 훅 사용
-  const { searchTerm, filteredDiaries, isSearching, handleSearch, handleClearSearch } = useDiarySearch(diaries);
+  const { searchTerm, filteredDiaries: searchFilteredDiaries, isSearching, handleSearch, handleClearSearch } = useDiarySearch(diaries);
+  
+  // 필터 훅 사용 (검색된 결과에 필터 적용)
+  const { selectedFilter, filteredDiaries, filterOptions, handleFilterChange, isFiltered } = useDiaryFilter(searchFilteredDiaries);
   
   // 검색 시 페이지를 첫 페이지로 리셋
   const handleSearchWithPageReset = (term: string) => {
@@ -69,9 +73,12 @@ const Diaries: React.FC = () => {
                 variant="primary"
                 theme="light"
                 size="large"
-                options={[{ value: 'all', label: '전체' }]}
-                defaultValue={'all'}
+                options={filterOptions}
+                defaultValue={selectedFilter}
+                value={selectedFilter}
+                onChange={handleFilterChange}
                 className={styles.selectWidth}
+                data-testid="emotion-filter-select"
               />
               <SearchBar
                 variant="primary"
@@ -135,9 +142,12 @@ const Diaries: React.FC = () => {
                 variant="primary"
                 theme="light"
                 size="large"
-                options={[{ value: 'all', label: '전체' }]}
-                defaultValue={'all'}
+                options={filterOptions}
+                defaultValue={selectedFilter}
+                value={selectedFilter}
+                onChange={handleFilterChange}
                 className={styles.selectWidth}
+                data-testid="emotion-filter-select"
               />
               <SearchBar
                 variant="primary"
@@ -203,9 +213,12 @@ const Diaries: React.FC = () => {
               variant="primary"
               theme="light"
               size="large"
-              options={[{ value: 'all', label: '전체' }]}
-              defaultValue={'all'}
+              options={filterOptions}
+              defaultValue={selectedFilter}
+              value={selectedFilter}
+              onChange={handleFilterChange}
               className={styles.selectWidth}
+              data-testid="emotion-filter-select"
             />
 
             <SearchBar
@@ -257,6 +270,7 @@ const Diaries: React.FC = () => {
                     key={diary.id} 
                     className={styles.styles_diaryCard}
                     onClick={handleCardClick(diary.id)}
+                    data-testid={`diary-card-${diary.id}`}
                   >
                     <div className={styles.styles_cardImageWrapper}>
                       <button

@@ -175,6 +175,7 @@ export const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
               onClick={handleSearchClick}
               disabled={disabled || loading}
               aria-label="검색"
+              data-testid="search-button"
             >
               {loading ? (
                 <svg
@@ -218,6 +219,7 @@ export const SearchBar = forwardRef<HTMLInputElement, SearchBarProps>(
             onKeyDown={handleKeyDown}
             autoFocus={autoFocus}
             aria-label="검색어 입력"
+            data-testid="search-input"
             {...rest}
           />
           
