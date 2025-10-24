@@ -13,6 +13,7 @@ import { useDiaryBinding, getEmotionImages, truncateTitle } from './hooks/index.
 import { useDiaryLinkRouting } from './hooks/index.link.routing.hook';
 import { useDiarySearch } from './hooks/index.search.hook';
 import { useDiaryFilter } from './hooks/index.filter.hook';
+import { usePagination } from './hooks/index.pagination.hook';
 
 // 기존 Diary 타입은 DiaryData로 대체됨 (hooks/index.binding.hook.ts에서 import)
 
@@ -21,10 +22,6 @@ import { useDiaryFilter } from './hooks/index.filter.hook';
 // mockDiaries는 제거됨 - 실제 로컬스토리지 데이터를 사용
 
 const Diaries: React.FC = () => {
-  // 페이지네이션 상태 관리
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12; // 3행 * 4열 = 12개
-  
   // 모달 훅 사용
   const { openDiaryModal } = useDiaryModal();
   
@@ -40,19 +37,24 @@ const Diaries: React.FC = () => {
   // 필터 훅 사용 (검색된 결과에 필터 적용)
   const { selectedFilter, filteredDiaries, filterOptions, handleFilterChange, isFiltered } = useDiaryFilter(searchFilteredDiaries);
   
+  // 페이지네이션 훅 사용
+  const {
+    currentPage,
+    totalPages,
+    setCurrentPage,
+    resetPagination,
+    startIndex,
+    endIndex
+  } = usePagination(filteredDiaries.length, 12);
+  
   // 검색 시 페이지를 첫 페이지로 리셋
   const handleSearchWithPageReset = (term: string) => {
     handleSearch(term);
-    setCurrentPage(1);
+    resetPagination();
   };
-  
-  // 총 페이지 수 계산 (검색된 결과 기준)
-  const totalPages = Math.ceil(filteredDiaries.length / itemsPerPage);
 
   // 현재 페이지에 해당하는 일기 데이터 (검색된 결과 기준)
   const getCurrentPageDiaries = () => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
     return filteredDiaries.slice(startIndex, endIndex);
   };
 

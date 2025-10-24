@@ -273,3 +273,116 @@
 .copyButton img {
   object-fit: contain;
 }
+
+/* 수정 모드 스타일 */
+.editEmotionSection {
+  width: 1168px;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.editEmotionLabel {
+  margin: 0;
+  margin-bottom: 16px;
+  font-family: var(--typography-title01-fontFamily);
+  font-weight: var(--typography-title01-fontWeight);
+  font-size: var(--typography-title01-fontSize);
+  line-height: var(--typography-title01-lineHeight);
+  color: var(--color-text-primary);
+}
+
+.emotionRadioGroup {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.emotionRadioItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.emotionRadioInput {
+  width: 24px;
+  height: 24px;
+  accent-color: var(--color-primary-600);
+}
+
+.emotionRadioText {
+  font-family: var(--typography-title01-fontFamily);
+  font-weight: var(--typography-title01-fontWeight);
+  font-size: var(--typography-title01-fontSize);
+  line-height: var(--typography-title01-lineHeight);
+  color: var(--color-text-primary);
+}
+
+.editTitleSection,
+.editContentSection {
+  width: 1168px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.editLabel {
+  margin-bottom: 8px;
+  font-family: var(--typography-body01-fontFamily);
+  font-weight: var(--typography-body01-fontWeight);
+  font-size: var(--typography-body01-fontSize);
+  line-height: var(--typography-body01-lineHeight);
+  color: var(--color-text-primary);
+}
+
+.editInput {
+  width: 1168px;
+  height: 48px;
+}
+
+.editTextarea {
+  width: 1168px;
+  min-height: 128px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border-primary);
+  border-radius: 8px;
+  font-family: var(--typography-body01-fontFamily);
+  font-weight: var(--typography-body01-fontWeight);
+  font-size: var(--typography-body01-fontSize);
+  line-height: var(--typography-body01-lineHeight);
+  color: var(--color-text-primary);
+  background-color: var(--color-background-primary);
+  resize: vertical;
+}
+
+.editTextarea:focus {
+  outline: none;
+  border-color: var(--color-primary-600);
+}
+
+.editButtonSection {
+  width: 1168px;
+  height: 48px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.cancelButton {
+  width: 104px;
+  height: 48px;
+  border: 1px solid var(--color-border-primary) !important;
+  background-color: var(--color-background-primary) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.updateButton {
+  width: 104px;
+  height: 48px;
+  background-color: var(--color-primary-600) !important;
+  border: none !important;
+  color: var(--color-text-white) !important;
+}
