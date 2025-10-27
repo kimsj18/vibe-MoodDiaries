@@ -14,6 +14,8 @@ import { useDiaryLinkRouting } from './hooks/index.link.routing.hook';
 import { useDiarySearch } from './hooks/index.search.hook';
 import { useDiaryFilter } from './hooks/index.filter.hook';
 import { usePagination } from './hooks/index.pagination.hook';
+import { useDiaryDelete } from './hooks/index.delete.hook';
+import { useAuthGuard } from '@/commons/providers/auth/auth.guard.hook';
 
 // 기존 Diary 타입은 DiaryData로 대체됨 (hooks/index.binding.hook.ts에서 import)
 
@@ -29,7 +31,13 @@ const Diaries: React.FC = () => {
   const { diaries, loading, error } = useDiaryBinding();
   
   // 링크 라우팅 훅 사용
-  const { handleCardClick, handleDeleteClick } = useDiaryLinkRouting();
+  const { handleCardClick } = useDiaryLinkRouting();
+  
+  // 삭제 훅 사용
+  const { handleDeleteClick: deleteDiary } = useDiaryDelete();
+  
+  // 권한 체크 훅 사용
+  const { isLoggedIn } = useAuthGuard();
   
   // 검색 훅 사용
   const { searchTerm, filteredDiaries: searchFilteredDiaries, isSearching, handleSearch, handleClearSearch } = useDiarySearch(diaries);
@@ -275,20 +283,27 @@ const Diaries: React.FC = () => {
                     data-testid={`diary-card-${diary.id}`}
                   >
                     <div className={styles.styles_cardImageWrapper}>
-                      <button
-                        type="button"
-                        className={styles.styles_closeButton}
-                        aria-label="카드 닫기"
-                        onClick={handleDeleteClick}
-                      >
-                        <Image
-                          src="/icons/close_outline_light_s.svg"
-                          alt="닫기"
-                          width={20}
-                          height={20}
-                          className={styles.styles_closeIcon}
-                        />
-                      </button>
+                      {isLoggedIn && (
+                        <button
+                          type="button"
+                          className={styles.styles_closeButton}
+                          aria-label="카드 닫기"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            deleteDiary(diary.id, diary.title);
+                          }}
+                          data-testid={`delete-button-${diary.id}`}
+                        >
+                          <Image
+                            src="/icons/close_outline_light_s.svg"
+                            alt="닫기"
+                            width={20}
+                            height={20}
+                            className={styles.styles_closeIcon}
+                          />
+                        </button>
+                      )}
                       <Image
                         src={emotionImages.medium}
                         alt={getEmotionDisplayText(diary.emotion)}

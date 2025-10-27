@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { EmotionType } from '@/commons/constants/enum';
 
 // 다이어리 데이터 타입 정의
-interface DiaryData {
+export interface DiaryData {
   id: number;
   title: string;
   content: string;

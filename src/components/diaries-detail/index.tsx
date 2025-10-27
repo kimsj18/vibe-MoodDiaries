@@ -8,6 +8,9 @@ import { EmotionType, getEmotionData } from '@/commons/constants/enum';
 import { useBindingHook } from './hooks/index.binding.hook';
 import { useRetrospectFormHook } from './hooks/index.retrospect.form.hook';
 import { useUpdateFormHook } from './hooks/index.update.hook';
+import { useDeleteHook } from './hooks/index.delete.hook';
+import { useModal } from '@/commons/providers/modal/modal.provider';
+import { Modal } from '@/commons/components/modal';
 import { SelectBox } from '@/commons/components/selectbox';
 import styles from './styles.module.css';
 
@@ -51,6 +54,15 @@ const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
     }
   );
   
+  // Modal Provider 사용
+  const { openModal: openModalPortal, closeModal: closeModalPortal } = useModal();
+  
+  // 삭제 기능 hook
+  const { openModal, closeModal, deleteDiary } = useDeleteHook(parseInt(id, 10), {
+    openModal: openModalPortal,
+    closeModal: closeModalPortal,
+  });
+  
   // 회고 데이터 로드
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -81,7 +93,26 @@ const DiariesDetail: React.FC<DiariesDetailProps> = ({ id }) => {
   };
 
   const handleDelete = () => {
-    console.log('삭제 버튼 클릭');
+    openModal(
+      <Modal
+        variant="danger"
+        actions="dual"
+        theme="light"
+        title="일기 삭제"
+        message="일기를 삭제 하시겠어요?"
+        confirmText="삭제"
+        cancelText="취소"
+        onConfirm={handleConfirmDelete}
+        onCancel={closeModal}
+        isOpen={true}
+        confirmTestId="modal-confirm-button"
+        cancelTestId="modal-cancel-button"
+      />
+    );
+  };
+
+  const handleConfirmDelete = () => {
+    deleteDiary(parseInt(id, 10));
   };
 
   const handleRetrospectSubmit = form.handleSubmit(onSubmit);
