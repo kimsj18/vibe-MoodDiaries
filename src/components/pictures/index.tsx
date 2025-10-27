@@ -113,11 +113,6 @@ const Pictures: React.FC = () => {
                 className={styles.pictureItem}
                 data-testid="picture-item"
                 ref={getItemRef(index)}
-                style={{
-                  maxWidth: `${currentImageSize.width}px`,
-                  width: `${currentImageSize.width}px`,
-                  aspectRatio: `${currentImageSize.width}/${currentImageSize.height}`
-                }}
               >
                 <div className={styles.pictureWrapper}>
                   <img

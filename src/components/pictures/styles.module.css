@@ -48,10 +48,27 @@
   justify-content: center;
 }
 
+/* 데스크톱 - 필터별 기본 스타일 */
+.pictureGrid[data-filter="default"] .pictureItem {
+  max-width: 640px;
+  width: 640px;
+  aspect-ratio: 1 / 1; /* 640x640 */
+}
+
+.pictureGrid[data-filter="horizontal"] .pictureItem {
+  max-width: 640px;
+  width: 640px;
+  aspect-ratio: 4 / 3; /* 640x480 */
+}
+
+.pictureGrid[data-filter="vertical"] .pictureItem {
+  max-width: 480px;
+  width: 480px;
+  aspect-ratio: 3 / 4; /* 480x640 */
+}
+
 .pictureItem {
-  width: 100%;
   transition: all 0.3s ease;
-  /* max-width와 aspect-ratio는 인라인 스타일로 동적 설정 */
 }
 
 .pictureWrapper {
@@ -71,7 +88,7 @@
 }
 
 /* 반응형 디자인 */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .container {
     padding: 0 20px;
     gap: 20px;
@@ -80,6 +97,25 @@
   .filterSelectBox {
     width: 120px;
     min-width: 120px;
+  }
+
+  /* 모바일에서 이미지 아이템 크기 고정 (280px 너비 기준) */
+  .pictureGrid[data-filter="default"] .pictureItem {
+    max-width: 280px !important;
+    width: 280px !important;
+    aspect-ratio: 1 / 1 !important; /* 280x280 */
+  }
+
+  .pictureGrid[data-filter="horizontal"] .pictureItem {
+    max-width: 280px !important;
+    width: 280px !important;
+    aspect-ratio: 4 / 3 !important; /* 280x210 */
+  }
+
+  .pictureGrid[data-filter="vertical"] .pictureItem {
+    max-width: 280px !important;
+    width: 280px !important;
+    aspect-ratio: 3 / 4 !important; /* 280x372 */
   }
 }
 
@@ -99,7 +135,7 @@
 .splashScreen {
   width: 100%;
   max-width: 640px;
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
   background-color: #e5e7eb; /* 회색 배경 */
   border-radius: 24px;
   position: relative;
@@ -151,6 +187,13 @@
 }
 
 /* 반응형 - 스플래시 스크린 */
+@media (max-width: 767px) {
+  .splashScreen {
+    max-width: 280px;
+    border-radius: 24px;
+  }
+}
+
 @media (max-width: 480px) {
   .splashScreen {
     border-radius: 16px;

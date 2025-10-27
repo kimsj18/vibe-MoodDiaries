@@ -112,6 +112,41 @@ const Diaries: React.FC = () => {
               일기쓰기
             </Button>
           </div>
+          <div className={styles.searchContentMobile}>
+            <SearchBar
+              variant="primary"
+              theme="light"
+              size="large"
+              placeholder="검색어를 입력해 주세요."
+              className={styles.searchBarMobile}
+              onSearch={handleSearchWithPageReset}
+              onClear={handleClearSearch}
+              loading={isSearching}
+            />
+            <div className={styles.searchRightGroup}>
+              <SelectBox
+                variant="primary"
+                theme="light"
+                size="large"
+                options={filterOptions}
+                defaultValue={selectedFilter}
+                value={selectedFilter}
+                onChange={handleFilterChange}
+                className={styles.selectWidthMobile}
+                data-testid="emotion-filter-select-mobile"
+              />
+              <Button
+                variant="primary"
+                theme="light"
+                size="large"
+                className={styles.buttonWidthMobile}
+                onClick={openDiaryModal}
+                data-testid="diary-write-button-mobile"
+              >
+                일기쓰기
+              </Button>
+            </div>
+          </div>
         </div>
         <div className={styles.gap2}></div>
         <div className={styles.main}>
@@ -181,6 +216,41 @@ const Diaries: React.FC = () => {
               일기쓰기
             </Button>
           </div>
+          <div className={styles.searchContentMobile}>
+            <SearchBar
+              variant="primary"
+              theme="light"
+              size="large"
+              placeholder="검색어를 입력해 주세요."
+              className={styles.searchBarMobile}
+              onSearch={handleSearchWithPageReset}
+              onClear={handleClearSearch}
+              loading={isSearching}
+            />
+            <div className={styles.searchRightGroup}>
+              <SelectBox
+                variant="primary"
+                theme="light"
+                size="large"
+                options={filterOptions}
+                defaultValue={selectedFilter}
+                value={selectedFilter}
+                onChange={handleFilterChange}
+                className={styles.selectWidthMobile}
+                data-testid="emotion-filter-select-mobile"
+              />
+              <Button
+                variant="primary"
+                theme="light"
+                size="large"
+                className={styles.buttonWidthMobile}
+                onClick={openDiaryModal}
+                data-testid="diary-write-button-mobile"
+              >
+                일기쓰기
+              </Button>
+            </div>
+          </div>
         </div>
         <div className={styles.gap2}></div>
         <div className={styles.main}>
@@ -217,6 +287,7 @@ const Diaries: React.FC = () => {
 
       {/* Search 영역: 1168 * 48 */}
       <div className={styles.search}>
+        {/* 데스크톱 버전 */}
         <div className={styles.searchContent}>
           <div className={styles.searchLeftGroup}>
             <SelectBox
@@ -253,6 +324,43 @@ const Diaries: React.FC = () => {
           >
             일기쓰기
           </Button>
+        </div>
+
+        {/* 모바일 버전 */}
+        <div className={styles.searchContentMobile}>
+          <SearchBar
+            variant="primary"
+            theme="light"
+            size="large"
+            placeholder="검색어를 입력해 주세요."
+            className={styles.searchBarMobile}
+            onSearch={handleSearchWithPageReset}
+            onClear={handleClearSearch}
+            loading={isSearching}
+          />
+          <div className={styles.searchRightGroup}>
+            <SelectBox
+              variant="primary"
+              theme="light"
+              size="large"
+              options={filterOptions}
+              defaultValue={selectedFilter}
+              value={selectedFilter}
+              onChange={handleFilterChange}
+              className={styles.selectWidthMobile}
+              data-testid="emotion-filter-select-mobile"
+            />
+            <Button
+              variant="primary"
+              theme="light"
+              size="large"
+              className={styles.buttonWidthMobile}
+              onClick={openDiaryModal}
+              data-testid="diary-write-button-mobile"
+            >
+              일기쓰기
+            </Button>
+          </div>
         </div>
       </div>
 

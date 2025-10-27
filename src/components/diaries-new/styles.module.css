@@ -11,6 +11,16 @@
   gap: 40px;
 }
 
+/* 반응형: 브레이크포인트 767px 이하 - 모바일 */
+@media (max-width: 767px) {
+  .wrapper {
+    width: 320px;
+    height: 620px;
+    padding: 16px;
+    gap: 24px;
+  }
+}
+
 /* Header - 일기 쓰기 title */
 .header {
   width: 100%;
@@ -28,6 +38,14 @@
   margin: 0;
 }
 
+/* 반응형: 브레이크포인트 767px 이하 - 모바일 */
+@media (max-width: 767px) {
+  .headerTitle {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
 /* Emotion Box - 기분 선택 영역 */
 .emotionBox {
   width: 100%;
@@ -43,6 +61,18 @@
   line-height: var(--typography-headline03-lineHeight);
   color: var(--color-text-primary);
   margin: 0;
+}
+
+/* 반응형: 브레이크포인트 767px 이하 - 모바일 */
+@media (max-width: 767px) {
+  .emotionTitle {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  
+  .emotionRadioGroup {
+    gap: 12px;
+  }
 }
 
 .emotionRadioGroup {
@@ -74,6 +104,19 @@
   cursor: pointer;
 }
 
+/* 반응형: 브레이크포인트 767px 이하 - 모바일 */
+@media (max-width: 767px) {
+  .emotionRadioLabel {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  
+  .emotionRadioInput {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 /* Input Title - 제목 입력 영역 */
 .inputTitle {
   width: 100%;
@@ -88,6 +131,14 @@
   font-size: var(--typography-body02_m-fontSize);
   line-height: var(--typography-body02_m-lineHeight);
   color: var(--color-text-secondary);
+}
+
+/* 반응형: 브레이크포인트 767px 이하 - 모바일 */
+@media (max-width: 767px) {
+  .inputLabel {
+    font-size: 10px;
+    line-height: 12px;
+  }
 }
 
 .titleInput {
@@ -128,6 +179,15 @@
   color: var(--color-text-tertiary);
 }
 
+/* 반응형: 브레이크포인트 767px 이하 - 모바일 */
+@media (max-width: 767px) {
+  .contentTextarea {
+    font-size: 12px;
+    line-height: 16px;
+    padding: 12px;
+  }
+}
+
 /* Footer - 버튼 영역 */
 .footer {
   width: 100%;
@@ -144,4 +204,23 @@
 .submitButton {
   width: 104px;
   height: 48px;
+}
+
+/* 반응형: 브레이크포인트 767px 이하 - 모바일 */
+@media (max-width: 767px) {
+  .footer {
+    gap: 12px;
+  }
+  
+  .closeButton {
+    width: calc(50% - 6px);
+    min-width: 80px;
+    height: 40px;
+  }
+  
+  .submitButton {
+    width: calc(50% - 6px);
+    min-width: 80px;
+    height: 40px;
+  }
 }
